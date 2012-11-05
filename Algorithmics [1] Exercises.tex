@@ -202,6 +202,21 @@
 
 % -- Text ----------------------------------------------------------------------
 
+\section{Exercise 7 (Planar Graphs)}
+
+\begin{itemize}
+
+    \item Show that $m ≤ 3n − 6$ holds for any simple planar graph with $n ≥ 3$
+    vertices and m edges.
+
+    \item Show that $m ≤ 2n − 4$ holds for any simple planar bipartite graph
+    with $n ≥ 3$ vertices and m edges.
+
+    \item Use Euler’s formula to show that each simple, planar graph contains a
+    vertex $v$ of degree $d(v) ≤ 5$.
+
+\end{itemize}
+
 \section{Exercise 9 (Floyd-Warshal Algorithm)}
 
 Apply the Floyd-Warshal algorithm as presented in the lecture to the given
@@ -327,7 +342,74 @@ D^{(6)} =
 \begin{minipage}[b]{0.5\linewidth}
 \end{minipage}
 
+\section{Exercise 10 (Johnson’s Algorithm)}
 
+Calculate the values $hᵢ$ and $\hat{w}_{ij}$ as it is done by Johnson’s
+algorithm for the graph of exercise 9.
+
+\begin{minipage}[b]{0.5\linewidth}
+\[
+A' =
+\left(
+    \begin{array}{cccccc}
+        0   &   0   &   0   &   0   &   0   &  0    \\
+        ∞   &   0   &   2   &   1   &   ∞   &  ∞    \\
+        ∞   &   ∞   &   0   &   ∞   &   7   &  ∞    \\
+        ∞   &   ∞   &   3   &   0   &   ∞   &  ∞    \\
+        ∞   &   ∞   &   -3  &   ∞   &   0   &  4    \\
+        ∞   &   ∞   &   5   &   -2  &   ∞   &  0    \\
+    \end{array}
+\right)
+\]
+\end{minipage}
+\begin{minipage}[b]{0.5\linewidth}
+\begin{center}
+    \begin{tabular}{c|cccccc}
+        &  $δ_s$ &  $δ₁$  &  $δ₂$  &  $δ₃$  &  $δ₄$  &  $δ₅$\\
+    \hline
+    0   &  0     &  ∞      &  ∞      &  ∞      &  ∞      &  ∞    \\
+    1   &  0     &  0      &  0      &  0      &  0      &  0    \\
+    2   &  0     &  0      &  -3     &  -2     &  0      &  0    \\
+    3   &  0     &  0      &  -3     &  -2     &  0      &  0    \\
+    4   &  0     &  0      &  -3     &  -2     &  0      &  0    \\
+    5   &  0     &  0      &  -3     &  -2     &  0      &  0    \\
+    \hline
+        &  $h_s$ &  $h₁$  &  $h₂$  &  $h₃$  &  $h₄$  &  $h₅$\\
+    \end{tabular}
+\end{center}
+\end{minipage}
+
+\begin{figure}[htbp]
+    \caption{Graph for Johnson's Algorithm with initial weights}
+    \vskip 0.2cm
+    \centering
+    \includegraphics[width=0.6\textwidth]{Figures/Exercise_10_Initial}
+    \label{figure:Exercise_10_Initial}
+\end{figure}
+
+\begin{figure}[htbp]
+    \caption{
+        Graph for Johnson's Algorithm with modified weight function
+        $\hat{w}_{ij}$
+    }
+    \vskip 0.2cm
+    \centering
+    \includegraphics[width=0.6\textwidth]{Figures/Exercise_10_Modified_Weights}
+    \label{figure:Exercise_10_Modified_Weights}
+\end{figure}
+
+\[
+A =
+\left(
+    \begin{array}{cccccc}
+       0   &   5   &   3   &   ∞   &  ∞    \\
+       ∞   &   0   &   ∞   &   4   &  ∞    \\
+       ∞   &   4   &   0   &   ∞   &  2    \\
+       ∞   &   0   &   ∞   &   0   &  4    \\
+       ∞   &   8   &   0   &   ∞   &  0    \\
+    \end{array}
+\right)
+\]
 
 % -- Bibliography --------------------------------------------------------------
 
