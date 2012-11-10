@@ -19,6 +19,8 @@
 \usepackage{float}
 % Support highlighting of certain parts of the text
 \usepackage{framed}
+% Defines a \FloatBarrier command, beyond which floats may not pass
+\usepackage{placeins}
 % Headers & Footers
 \usepackage[automark, nouppercase]{scrpage2}
 % To change the format of titles
@@ -226,6 +228,8 @@ graph.
     \includegraphics[width=0.5\textwidth]{Figures/Exercise_9}
 \end{center}
 
+\subsection{Solution}
+
 \[
 W = D^{(1)} =
 \left(
@@ -347,6 +351,8 @@ D^{(6)} =
 Calculate the values $hᵢ$ and $\hat{w}_{ij}$ as it is done by Johnson’s
 algorithm for the graph of exercise 9.
 
+\subsection{Solution}
+
 \begin{minipage}[b]{0.5\linewidth}
 \[
 A' =
@@ -383,7 +389,7 @@ A' =
     \caption{Graph for Johnson's Algorithm with initial weights}
     \vskip 0.2cm
     \centering
-    \includegraphics[width=0.6\textwidth]{Figures/Exercise_10_Initial}
+    \includegraphics[width=0.8\textwidth]{Figures/Exercise_10_Initial}
     \label{figure:Exercise_10_Initial}
 \end{figure}
 
@@ -394,7 +400,7 @@ A' =
     }
     \vskip 0.2cm
     \centering
-    \includegraphics[width=0.6\textwidth]{Figures/Exercise_10_Modified_Weights}
+    \includegraphics[width=0.8\textwidth]{Figures/Exercise_10_Modified_Weights}
     \label{figure:Exercise_10_Modified_Weights}
 \end{figure}
 
@@ -410,6 +416,90 @@ A =
     \end{array}
 \right)
 \]
+
+\FloatBarrier
+\section{Exercise 11 (Modeling as Shortest Path Problem)}
+
+The following table illustrates a number of possible duties for the drivers of
+a bus company. We wish to ensure, at the lowest possible cost, that at least
+one driver is on duty for each hour of the planning period (9 AM to 5 PM).
+Formulate and solve this scheduling problem as shortest path problem.
+
+\begin{center}
+    \begin{tabular}{|c|c|c|c|c|c|c|c|c|}
+        \hline
+        Duty hours  & 9-13  & 9-11  & 12-15 & 12-17 & 14-17 & 13-16 & 16-17\\
+        \hline
+        Costs       & 30    & 18    & 21    & 38    & 20    & 22    & 9\\
+        \hline
+    \end{tabular}
+\end{center}
+
+\subsection{Solution}
+
+We create a graph in which nodes represent the start and the end time of the
+work hours of one bus driver. The edge between two nodes describes the cost of
+the driver for the given hours.\\
+
+Since it is alway possible that multiple bus drivers are on duty for a certain
+amount of time we add edges with cost 0 between a certain hour and the hour
+before. We now apply the Dijkstra algorithm on the resulting graph, shown in
+Figure~\ref{figure:Bus_Driver_Schedule}.
+
+\begin{figure}[htbp]
+    \caption{Weighted graph for Exercise 11}
+    \vskip 0.2cm
+    \centering
+    \includegraphics[width=\textwidth]{Figures/Bus_Driver_Schedule}
+    \label{figure:Bus_Driver_Schedule}
+\end{figure}
+
+\begin{table}[htbp]
+    % Highlight text with color
+    \newcommand{\highlight}[1]{\textcolor{orange}{#1}}
+    \caption{Results of the Dijkstra algorithm, applied to
+             Figure~\ref{figure:Bus_Driver_Schedule}}
+    \begin{center}
+        \begin{tabular}{cccccccc|cc}
+
+            9 & 11 & 12 & 13 & 14 & 15 & 16 & 17 & Node & Previous\\
+            \hline
+            \highlight{0}
+              & ∞  & ∞  & ∞  & ∞  & ∞  & ∞  & ∞  & 9    & — \\
+
+              & \highlight{18}
+                   & ∞  & 30 & ∞  & ∞  & ∞  & ∞  & 11   & 9 \\
+
+              &    & ∞  & \highlight{30}
+                             & ∞  & ∞  & ∞  & ∞  & 13   & 9 \\
+
+              &    & \highlight{30}
+                        &    & ∞  & ∞  & 52 & ∞  & 12   & 13 \\
+
+              &    &    &    & ∞  & \highlight{51}
+                                       & 52 & 68 & 15   & 12 \\
+
+              &    &    &    & \highlight{51}
+                                  &    & 52 & 68 & 14   & 15 \\
+
+              &    &    &    &    &    & \highlight{52}
+                                            & 68 & 16   & 13 \\
+
+              &    &    &    &    &    &    & \highlight{61}
+                                                 & 17   & 16 \\
+        \end{tabular}
+    \end{center}
+    \label{table:Label}
+\end{table}
+
+The shortest path and therefore the schedule with the minimum cost of „61” is:
+
+\begin{center}
+    \begin{tabular}{c|ccc}
+        hours & 9-13 & 13-16 & 16-17\\
+        costs & 30     & 22  & 9\\
+    \end{tabular}
+\end{center}
 
 % -- Bibliography --------------------------------------------------------------
 
