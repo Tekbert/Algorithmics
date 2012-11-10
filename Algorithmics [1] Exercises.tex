@@ -13,14 +13,14 @@
 % Context sensitive quotation
 \usepackage{csquotes}
 % Citations
-% \usepackage[style=alphabetic, backend=biber]{biblatex}
-    % \addbibresource{References.bib}
+\usepackage[style=alphabetic, backend=biber]{biblatex}
+    \addbibresource{References.bib}
 % Extend options for positioning floats
 \usepackage{float}
 % Support highlighting of certain parts of the text
 \usepackage{framed}
-% Defines a \FloatBarrier command, beyond which floats may not pass
-\usepackage{placeins}
+% Definitions for mathematical type setting
+\usepackage{mathtools}
 % Headers & Footers
 \usepackage[automark, nouppercase]{scrpage2}
 % To change the format of titles
@@ -209,7 +209,7 @@
 \begin{itemize}
 
     \item Show that $m ≤ 3n − 6$ holds for any simple planar graph with $n ≥ 3$
-    vertices and m edges.
+    vertices and $m$ edges.
 
     \item Show that $m ≤ 2n − 4$ holds for any simple planar bipartite graph
     with $n ≥ 3$ vertices and m edges.
@@ -218,6 +218,90 @@
     vertex $v$ of degree $d(v) ≤ 5$.
 
 \end{itemize}
+
+\subsection{Solution}
+
+\paragraph{Remark:} The solution for this exercise is basically a slightly
+modified versions of the proofs from “Solution to exercises 1” by Thomas
+Hamböck~\cite{Solutions_Exercise1_Hamboeck}.
+
+\subsubsection{Exercise 7.1}
+
+We need to show that $m ≤ 3n − 6$ holds for any simple planar graph with $n ≥
+3$ vertices and $m$ edges.\\
+
+We know that each edge in a simple planar graph is a border of two faces. We
+also know that each face has to contain at least $3$ edges. From that knowledge
+we conclude that the sum of the edges multiplied by $2$ is equal to the sum of
+the edges of all faces counted together:
+\[
+    2 · |E| = ∑_{i≥3} i · Fᵢ \quad i…\text{Number of edges of the face }Fᵢ
+\]
+From the fact that each face contains at least $3$ edges we conclude the
+following:
+\begin{align*}
+      3 · ∑_{i≥3} Fᵢ    &≤ ∑_{i≥3} i · Fᵢ\\
+      3 · |F|           &≤ 2 · |E| \quad \biggm| ~: 3\\
+          |F|           &≤ \frac{2}{3} · |E|
+\end{align*}
+
+We now use Euler’s formula:
+\[
+    |V| - |E| + |F| = 2
+\]
+
+and insert the inequality from before:
+\begin{align*}
+    |V| - |E| + |F| = 2 &≤ |V| - |E| + \frac{2}{3} · |E| && \biggm| · 3\\
+    6                   &≤ 3·|V| - |E|\\
+    |E|                 &≤ 3·|V| - 6
+\end{align*}
+
+\subsubsection{Exercise 7.2}
+
+To show that $m ≤ 2n − 4$ holds for any simple planar bipartite graph with $n ≥
+3$ vertices and m edges we use basically the same arguments as in the example
+before.\\
+
+Instead of the minimum number of $3$ edges for each face, the number of
+edges for a face in a bipartite graph is at least $4$ (a graph with a face
+containing $3$ edges is never bipartite):
+\[
+    2 · |E| = ∑_{i≥4} i · Fᵢ \quad i…\text{Number of edges of the face }Fᵢ\\
+\]
+The number of edges in each face is bigger or equal to $4$:
+\begin{align*}
+      4 · ∑_{i≥4} Fᵢ    &≤ ∑_{i≥4} i · Fᵢ\\
+      4 · |F|           &≤ 2 · |E|\\
+          |F|           &≤ \frac{1}{2} · |E|
+\end{align*}
+Insert the inequality into Euler's formula:
+\begin{align*}
+      |V| - |E| + |F| = 2 &≤ |V| - |E| + \frac{1}{2} · |E| && \biggm| · 2\\
+      4                   &≤ 2·|V| - |E|\\
+      |E|                 &≤ 2·|V| - 4
+\end{align*}
+
+\subsubsection{Exercise 7.3}
+
+We use Euler’s formula to show that each simple, planar graph contains a vertex
+$v$ of degree $d(v) ≤ 5$.\\
+
+We assume that all vertices have degree greater than $5$. This means the
+average degree $d_{avg}$ has to be greater or equal to $6$:\\
+\[
+    d_{avg} = \frac{2|E|}{|V|} ≥ 6
+\]
+In the first sub-exercise we already used Euler's formula to show that $E ≤
+3·|V| - 6$ holds for each simple, planar graph:
+\begin{align*}
+    |E|                 &≤ 3·|V| - 6    &&\biggm| ~· 2\\
+    2·|E|               &≤ 6·|V| - 12   &&\biggm| ~: |V|\\
+    \frac{2·|E|}{|V|}   &≤ 6 -\frac{12}{|V|} < 6\\
+    d_{avg}             &< 6
+\end{align*}
+Since we showed that the average degree has to be smaller than $6$ we conclude
+that a node with degree $5$ or smaller has to exist in the graph.
 
 \section{Exercise 9 (Floyd-Warshal Algorithm)}
 
@@ -417,7 +501,6 @@ A =
 \right)
 \]
 
-\FloatBarrier
 \section{Exercise 11 (Modeling as Shortest Path Problem)}
 
 The following table illustrates a number of possible duties for the drivers of
@@ -504,8 +587,8 @@ The shortest path and therefore the schedule with the minimum cost of „61” i
 % -- Bibliography --------------------------------------------------------------
 
 % Set section format for bibliography
-% \titleformat{\section}{\sffamily\bfseries}{}{0pt}{}[{\color{aqua}\hrule}]
+\titleformat{\section}{\sffamily\bfseries}{}{0pt}{}[{\color{aqua}\hrule}]
 % Display bibliography
-% \printbibliography
+\printbibliography
 
 \end{document}
