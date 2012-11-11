@@ -278,7 +278,7 @@ The number of edges in each face is bigger or equal to $4$:
       4 · |F|           &≤ 2 · |E|\\
           |F|           &≤ \frac{1}{2} · |E|
 \end{align*}
-Insert the inequality into Euler's formula:
+Insert the inequality into Euler’s formula:
 \begin{align*}
       |V| - |E| + |F| = 2 &≤ |V| - |E| + \frac{1}{2} · |E| && \biggm| · 2\\
       4                   &≤ 2·|V| - |E|\\
@@ -295,7 +295,7 @@ average degree $d_{avg}$ has to be greater or equal to $6$:\\
 \[
     d_{avg} = \frac{2|E|}{|V|} ≥ 6
 \]
-In the first sub-exercise we already used Euler's formula to show that $E ≤
+In the first sub-exercise we already used Euler’s formula to show that $E ≤
 3·|V| - 6$ holds for each simple, planar graph:
 \begin{align*}
     |E|                 &≤ 3·|V| - 6    &&\biggm| ~· 2\\
@@ -305,6 +305,68 @@ In the first sub-exercise we already used Euler's formula to show that $E ≤
 \end{align*}
 Since we showed that the average degree has to be smaller than $6$ we conclude
 that a node with degree $5$ or smaller has to exist in the graph.
+
+\section{Exercise 8 (Dijkstra’s Shortest Path Algorithm)}
+
+Why is it not possible in general to apply Dijkstra’s shortest path algorithm
+to get the longest path. Under which circumstances can the longest path be
+computed efficiently?
+
+\subsection{Solution}
+
+Finding the longest path can be translated to finding the shortest path in a
+copy of the graph, where all edge weights are multiplied by $-1$. This might
+lead to a graph which contains negative weight cycles. This in turn means that
+the problem of finding the longest path is $\mathcal{NP}$
+complete~\cite{Algorithmics_Slides} and can therefore not computed using an
+polynomial time algorithm, like the Dijkstra algorithm.\\
+
+Even in an acyclic graph the Dijkstra algorithm might not find the correct
+maximum path. For example,
+Figure~\ref{figure:Dijkstra_Counter_Example}~\cite{Dijkstra_Longest_Path} shows
+an example where Dijkstra’s algorithm finds a path with weight $4$ ($A-B-C$)
+from node $A$ to node $C$ instead of the correct path $A-D-C$ with length $6$.\\
+
+\begin{figure}[htbp]
+    \caption{
+        An acyclic graph for which the Dijkstra algorithm does not find the
+        correct maximum path
+    }
+    \vskip 0.2cm
+    \centering
+    \includegraphics[width=0.4\textwidth]{Figures/Dijkstra_Counter_Example}
+    \label{figure:Dijkstra_Counter_Example}
+\end{figure}
+
+The problem, lies within the „greedy” nature of the Dijkstra algorithm. If
+we, for example, apply the Bellman-Ford algorithm on
+Figure~\ref{figure:Dijkstra_Counter_Example}, using the maximum operator instead
+of the minimum, we get the correct maximum path with length $6$ between the
+nodes $A$ and $C$ (see Table~\ref{table:Bellman_Ford_Longest_Path}).\\
+
+\begin{table}[htbp]
+    \caption{
+        Calculations for finding the longest path in
+        Figure~\ref{figure:Dijkstra_Counter_Example} using the Bellman-Ford
+        algorithm
+    }
+    \begin{center}
+        \begin{tabular}{cccc}
+            $δ_A$ & $δ_B$ & $δ_C$ & $δ_D$\\
+            \hline
+            0     &  ∞    &  ∞    &  ∞\\
+            0     &  2    &  ∞    &  1\\
+            0     &  2    &  4    &  6\\
+            0     &  2    &  4    &  6\\
+        \end{tabular}
+    \end{center}
+    \label{table:Bellman_Ford_Longest_Path}
+\end{table}
+
+In general the longest path can be computed in linear time if the graph is
+acyclic~\cite{Wikipedia_Longest_Path}. However, the Dijsktra algorithm is in
+general unable to find this longest path. Using the Bellman Ford
+algorithm instead should work.
 
 \section{Exercise 9 (Floyd-Warshal Algorithm)}
 
