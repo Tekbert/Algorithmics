@@ -38,7 +38,7 @@
 
 \newcommand{\Title}{Algorithmics}
 \newcommand{\TitleDescription}{Exercises}
-\newcommand{\Version}{1}
+\newcommand{\Version}{2}
 \newcommand{\Subject}
     {Solutions for the first exercise sheet of the course “Algorithmics”}
 \newcommand{\KeyWords}{randomized algorithms, graph theory}
@@ -46,6 +46,9 @@
 
 \newcommand{\AuthorOne}{René Schwaiger}
 \newcommand{\MailOne}{\href{mailto:sanssecours@f-m.fm}{sanssecours@f-m.fm}}
+
+% Highlight some text
+\newcommand{\highlight}[1]{\textcolor{orange}{#1}}
 
 % Syntax highlighting definitions
 \newcommand{\hlstd}[1]{\textcolor[rgb]{0,0,0}{#1}}
@@ -318,16 +321,16 @@ graph.
 W = D^{(1)} =
 \left(
     \begin{array}{ccccc}
-        \textcolor{orange}{0}   &
-        \textcolor{orange}{2}   &
-        \textcolor{orange}{1}   &
-        \textcolor{orange}{∞}   &
-        \textcolor{orange}{∞}   \\
+        \highlight{0}   &
+        \highlight{2}   &
+        \highlight{1}   &
+        \highlight{∞}   &
+        \highlight{∞}   \\
 
-        \textcolor{orange}{∞}   &   0   &   ∞   &   7   &   ∞   \\
-        \textcolor{orange}{∞}   &   3   &   0   &   ∞   &   4   \\
-        \textcolor{orange}{∞}   &   -3  &   ∞   &   0   &   4   \\
-        \textcolor{orange}{∞}   &   5   &   -2  &   ∞   &   0   \\
+        \highlight{∞}   &   0   &   ∞   &   7   &   ∞   \\
+        \highlight{∞}   &   3   &   0   &   ∞   &   4   \\
+        \highlight{∞}   &   -3  &   ∞   &   0   &   4   \\
+        \highlight{∞}   &   5   &   -2  &   ∞   &   0   \\
     \end{array}
 \right)
 \]
@@ -337,17 +340,17 @@ W = D^{(1)} =
 D^{(2)} =
 \left(
     \begin{array}{ccccc}
-        0   &   \textcolor{orange}{2}   &   1   &   ∞   &   ∞   \\
+        0   &   \highlight{2}   &   1   &   ∞   &   ∞   \\
 
-        \textcolor{orange}{∞}   &
-        \textcolor{orange}{0}   &
-        \textcolor{orange}{∞}   &
-        \textcolor{orange}{7}   &
-        \textcolor{orange}{∞}   \\
+        \highlight{∞}   &
+        \highlight{0}   &
+        \highlight{∞}   &
+        \highlight{7}   &
+        \highlight{∞}   \\
 
-        ∞   &   \textcolor{orange}{3}   &   0   &   ∞   &   4   \\
-        ∞   &   \textcolor{orange}{-3}  &   ∞   &   0   &   4   \\
-        ∞   &   \textcolor{orange}{5}   &   -2  &   ∞   &   0   \\
+        ∞   &   \highlight{3}   &   0   &   ∞   &   4   \\
+        ∞   &   \highlight{-3}  &   ∞   &   0   &   4   \\
+        ∞   &   \highlight{5}   &   -2  &   ∞   &   0   \\
     \end{array}
 \right)
 \]
@@ -357,17 +360,17 @@ D^{(2)} =
 D^{(3)} =
 \left(
     \begin{array}{ccccc}
-        0   &   2   &   \textcolor{orange}{1}   &   9   &   ∞   \\
-        ∞   &   0   &   \textcolor{orange}{∞}   &   7   &   ∞   \\
+        0   &   2   &   \highlight{1}   &   9   &   ∞   \\
+        ∞   &   0   &   \highlight{∞}   &   7   &   ∞   \\
 
-        \textcolor{orange}{∞}   &
-        \textcolor{orange}{3}   &
-        \textcolor{orange}{0}   &
-        \textcolor{orange}{10}  &
-        \textcolor{orange}{4}   \\
+        \highlight{∞}   &
+        \highlight{3}   &
+        \highlight{0}   &
+        \highlight{10}  &
+        \highlight{4}   \\
 
-        ∞   &   -3  &   \textcolor{orange}{∞}   &   0   &   4   \\
-        ∞   &   5   &   \textcolor{orange}{-2}  &   12   &   0  \\
+        ∞   &   -3  &   \highlight{∞}   &   0   &   4   \\
+        ∞   &   5   &   \highlight{-2}  &   12   &   0  \\
     \end{array}
 \right)
 \]
@@ -378,17 +381,17 @@ D^{(3)} =
 D^{(4)} =
 \left(
     \begin{array}{ccccc}
-        0   &   2   &   1   &   \textcolor{orange}{9}   &   5   \\
-        ∞   &   0   &   ∞   &   \textcolor{orange}{7}   &   ∞   \\
-        ∞   &   3   &   0   &   \textcolor{orange}{10}  &   4   \\
+        0   &   2   &   1   &   \highlight{9}   &   5   \\
+        ∞   &   0   &   ∞   &   \highlight{7}   &   ∞   \\
+        ∞   &   3   &   0   &   \highlight{10}  &   4   \\
 
-        \textcolor{orange}{∞}   &
-        \textcolor{orange}{-3}  &
-        \textcolor{orange}{∞}   &
-        \textcolor{orange}{0}   &
-        \textcolor{orange}{4}   \\
+        \highlight{∞}   &
+        \highlight{-3}  &
+        \highlight{∞}   &
+        \highlight{0}   &
+        \highlight{4}   \\
 
-        ∞   &   1   &   -2  &   \textcolor{orange}{8}   &   0   \\
+        ∞   &   1   &   -2  &   \highlight{8}   &   0   \\
     \end{array}
 \right)
 \]
@@ -398,16 +401,16 @@ D^{(4)} =
 D^{(5)} =
 \left(
     \begin{array}{ccccc}
-        0   &   2   &   1   &   9   &   \textcolor{orange}{5}   \\
-        ∞   &   0   &   ∞   &   7   &   \textcolor{orange}{11}  \\
-        ∞   &   3   &   0   &   10  &   \textcolor{orange}{4}   \\
-        ∞   &   -3  &   ∞   &   0   &   \textcolor{orange}{4}   \\
+        0   &   2   &   1   &   9   &   \highlight{5}   \\
+        ∞   &   0   &   ∞   &   7   &   \highlight{11}  \\
+        ∞   &   3   &   0   &   10  &   \highlight{4}   \\
+        ∞   &   -3  &   ∞   &   0   &   \highlight{4}   \\
 
-        \textcolor{orange}{∞}   &
-        \textcolor{orange}{1}   &
-        \textcolor{orange}{-2}  &
-        \textcolor{orange}{8}   &
-        \textcolor{orange}{0}   \\
+        \highlight{∞}   &
+        \highlight{1}   &
+        \highlight{-2}  &
+        \highlight{8}   &
+        \highlight{0}   \\
     \end{array}
 \right)
 \]
@@ -539,7 +542,6 @@ Figure~\ref{figure:Bus_Driver_Schedule}.
 
 \begin{table}[htbp]
     % Highlight text with color
-    \newcommand{\highlight}[1]{\textcolor{orange}{#1}}
     \caption{Results of the Dijkstra algorithm, applied to
              Figure~\ref{figure:Bus_Driver_Schedule}}
     \begin{center}
