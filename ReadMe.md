@@ -17,4 +17,4 @@ of fonts that are already installed on your system.
 # Translation #
 
 	# Generate pdf
-	xelatex *.tex
+	xelatex *.tex; biber *.tex; xelatex *.tex
