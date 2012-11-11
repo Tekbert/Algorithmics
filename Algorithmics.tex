@@ -206,7 +206,7 @@
 
 % -- Text ----------------------------------------------------------------------
 
-\section{Exercise 1 (Randomized Algorithm for 3-Coloring of a Graph)}
+\section{Exercise 1 (Randomized 3-Coloring Algorithm)}
 
 Given an undirected graph $G = (V, E)$, a 3-Coloring is an assignment of one of
 three colors, e.g. red, green, or blue, to each node so that two adjacent nodes
@@ -254,16 +254,32 @@ Figure shows the possible edge configurations.
     \right.
 \]
 \[
-    \text{Number of satisfied edges}: Z = ∑_{(i,j)∈E(G)}
+    \text{Number of satisfied edges}: Z = c^* · ∑_{(i,j)∈E(G)} Z_{ij}
 \]
 \[
     E[Z] =
-    ∑_{(i,j)∈E(G)}E[Z_{ij}] =
-    ∑_{(i,j)∈E(G)}Pr[e_{ij} \text{ is satisfied}] =
-    \frac{6}{9} =
-    \frac{2}{3}
+    c^* · ∑_{(i,j)∈E(G)}E[Z_{ij}] =
+    c^* · ∑_{(i,j)∈E(G)}Pr[e_{ij} \text{ is satisfied}] =
+    \frac{6}{9} c^∗=
+    \frac{2}{3} c^∗
 \]
 
+\section{Exercise 2 (3-Coloring Approximation Algorithm)}
+
+Assume all edges are satisfiable, i.e. $c^∗ = |E|$. How can you turn your
+algorithm into a $\frac{2}{3}$-approximation algorithm that is guaranteed to
+find a solution satisfying at least $\frac{2}{3} c^∗$ edges? What is the
+expected runtime of this extended algorithm?
+
+\subsection{Solution}
+
+We start by finding the probability that $k ≥ \frac{2}{3} c^∗$ edges are
+satisfied.
+\begin{align*}
+    p_{j}: \text{probability that exactly j clauses are satisfied}; &&
+    p = ∑_{j≥\frac{2}{3}c^*}p_j\\
+    E[Z] = 2/
+\end{align*}
 
 \section{Exercise 7 (Planar Graphs)}
 
