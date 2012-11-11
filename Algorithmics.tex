@@ -39,8 +39,7 @@
 \newcommand{\Title}{Algorithmics}
 \newcommand{\TitleDescription}{Exercises}
 \newcommand{\Version}{2}
-\newcommand{\Subject}
-    {Solutions for the first exercise sheet of the course “Algorithmics”}
+\newcommand{\Subject}{Solutions for the exercises of the course “Algorithmics”}
 \newcommand{\KeyWords}{randomized algorithms, graph theory}
 \newcommand{\LeftFooter}{Algorithmics}
 
@@ -206,6 +205,65 @@
 \pagestyle{scrheadings}
 
 % -- Text ----------------------------------------------------------------------
+
+\section{Exercise 1 (Randomized Algorithm for 3-Coloring of a Graph)}
+
+Given an undirected graph $G = (V, E)$, a 3-Coloring is an assignment of one of
+three colors, e.g. red, green, or blue, to each node so that two adjacent nodes
+do not have the same color. In an optimization variant of this problem, we
+maximize the number of satisfied edges, i.e. $max~\bigl|\left\{(u, v) ∈ E
+\bigm| u \text{ and } v \text{ have different colors}\right\}\bigr|$. Find a
+simple randomized algorithm that satisfies at least $\frac{2}{3} c^∗$ edges in
+the expected case, where $c^∗$ denotes 3 the maximum (optimum) number of
+satisfiable edges. Prove this expectation. What is the running time of the
+algorithm? Is your algorithm a Monte Carlo or a Las Vegas approach?
+
+\subsection{Solution}
+
+\paragraph{Pseudocode:}~
+\begin{leftbar}
+    \input{Code/color3}
+\end{leftbar}
+
+The pseudo-code above assigns a random color to each edge of a graph. The code
+describes a “Monte Carlo” algorithm, since there is no guarantee that the
+assignment really always satisfies at least $\frac{2}{3} c^∗$ edges. The
+running time of the algorithm is $Θ(|V|)$.
+
+\paragraph{Expectation of Satisfiability:}
+
+Figure shows the possible edge configurations.
+
+\begin{figure}[htbp]
+    \caption{Possible colorings of the 2 nodes of a edge in a 3-colored graph}
+    \vskip 0.2cm
+    \centering
+    \includegraphics[width=\textwidth]{Figures/3_Color_Possibilities_Edges}
+    \label{figure:3_Color_Possibilities_Edges}
+\end{figure}
+
+
+\[
+	\text{Random Variable: } Z_{ij} =
+    \left\{
+    	\begin{array}{l l}
+    		1 & \quad \text{if edge $e_{ij}$ is satisfied}\\
+
+    		0 & \quad \text{otherwise}
+    	\end{array}
+    \right.
+\]
+\[
+    \text{Number of satisfied edges}: Z = ∑_{(i,j)∈E(G)}
+\]
+\[
+    E[Z] =
+    ∑_{(i,j)∈E(G)}E[Z_{ij}] =
+    ∑_{(i,j)∈E(G)}Pr[e_{ij} \text{ is satisfied}] =
+    \frac{6}{9} =
+    \frac{2}{3}
+\]
+
 
 \section{Exercise 7 (Planar Graphs)}
 
@@ -647,6 +705,16 @@ The shortest path and therefore the schedule with the minimum cost of „61” i
         costs & 30     & 22  & 9\\
     \end{tabular}
 \end{center}
+
+\section{Exercise 12 (Delay Constrained Shortest Path)}
+
+Suppose we are given a network $N=(G,w,d), G=(V,A)$, where $w:A→ℤ^+$ and
+$d:A→ℤ^+$. The values $w_{ij}$ correspond to arc weights, $d_{ij}$ correspond
+to delays, i.e., using the arc $(i,j)$ requires $d_{ij}$ time. We are further
+given a positive number $D ∈ ℕ$, the delay constraint. Develop an
+efficient, i.e., $O(D · |A|)$, algorithm to find a shortest path $P$ from some
+arbitrary source node $s$ to some arbitrary target node $t$ which does not
+exceed the global delay constraint $D$, i.e., $∑_{(i,j) ∈ P} d_{ij} ≤ D$.
 
 % -- Bibliography --------------------------------------------------------------
 
