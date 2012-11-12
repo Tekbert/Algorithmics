@@ -207,6 +207,7 @@
 % -- Text ----------------------------------------------------------------------
 
 \section{Exercise 1 (Randomized 3-Coloring Algorithm)}
+\label{section:Exercise1}
 
 Given an undirected graph $G = (V, E)$, a 3-Coloring is an assignment of one of
 three colors, e.g. red, green, or blue, to each node so that two adjacent nodes
@@ -225,7 +226,7 @@ algorithm? Is your algorithm a Monte Carlo or a Las Vegas approach?
     \input{Code/color3}
 \end{leftbar}
 
-The pseudo-code above assigns a random color to each edge of a graph. The code
+The pseudo-code above assigns a random color to each node of a graph. The code
 describes a “Monte Carlo” algorithm, since there is no guarantee that the
 assignment really always satisfies at least $\frac{2}{3} c^∗$ edges. The
 running time of the algorithm is $Θ(|V|)$.
@@ -273,13 +274,27 @@ expected runtime of this extended algorithm?
 
 \subsection{Solution}
 
-We start by finding the probability that $k ≥ \frac{2}{3} c^∗$ edges are
+We start by finding the probability $p$ that $≥ \frac{2}{3} c^∗$ edges are
 satisfied.
 \begin{align*}
-    p_{j}: \text{probability that exactly j clauses are satisfied}; &&
-    p = ∑_{j≥\frac{2}{3}c^*}p_j\\
-    E[Z] = 2/
+    &p_{j}: \text{probability that exactly j edges are satisfied}; \quad
+    p = ∑_{j≥2/3|E|}p_j\\
+    & E[Z] =
+    \frac{2}{3} |E| =
+    ∑_{j<2/3|E|} j · p_j + ∑_{j≥2/3|E|} j · p_j ≤
+    \frac{2|E|-1}{3} ∑_{j<2/3|E|} p_j + |E| ∑_{j≥2/3|E|} p_j =\\
+    &= \frac{2|E|-1}{3} (1-p) + |E|·p ≤ \frac{2|E|-1}{3} + |E|·p\\
+    &⇒ \frac{2}{3} |E| ≤ \frac{2|E|-1}{3} + |E|·p\\
+    &\quad~~\frac{2}{3} |E| - \frac{2}{3} |E| + \frac{1}{3} ≤ |E|·p\\
+    &\quad~~p≥\frac{1}{3·|E|}
 \end{align*}
+
+Since we find a solution satisfying $\frac{2}{3} c^∗$ edges with a probability
+$p≥\frac{1}{3·|E|}$ we use the algorithm from Section~\ref{section:Exercise1}
+together with a routine which checks the number of satisfied edges (runtime:
+$O(|E|)$, and run this code till we find an assignment which satisfies $≥
+\frac{2}{3} c^∗$ edges. The expected run time of this algorithm is
+$O(3·|E|)·O(|V|+|E|)=O(|E|^2+|V|)$.
 
 \section{Exercise 7 (Planar Graphs)}
 
