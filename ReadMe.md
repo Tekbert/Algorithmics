@@ -7,11 +7,14 @@ at the Vienna University of Technology in the winter semester of 2012.
 
 # Dependencies #
 
-* [Xelatex](http://www.tug.org/texlive/)
+* [Highlight](http://www.andre-simon.de/doku/highlight/en/highlight.html) — Convert source code
+
+* [Xelatex](http://www.tug.org/texlive/) — Typesetting engine
+
 * Various Fonts
 
 If you do not own some of the fonts mentioned in the document, just replace the
-font names — they are located under the comment "% -- Fonts --" — with the name
+font names — they are located under the comment `% -- Fonts --` — with the name
 of fonts that are already installed on your system.
 
 # Translation #
