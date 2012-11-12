@@ -38,9 +38,9 @@
 
 \newcommand{\Title}{Algorithmics}
 \newcommand{\TitleDescription}{Exercises}
-\newcommand{\Version}{3}
+\newcommand{\Version}{4}
 \newcommand{\Subject}{Solutions for the exercises of the course “Algorithmics”}
-\newcommand{\KeyWords}{randomized algorithms, graph theory}
+\newcommand{\KeyWords}{Randomized Algorithms, Graph Theory, Shortest Path}
 \newcommand{\LeftFooter}{Algorithmics}
 
 \newcommand{\AuthorOne}{René Schwaiger}
@@ -289,8 +289,8 @@ satisfied.
     &\quad~~p≥\frac{1}{3·|E|}
 \end{align*}
 
-Since we find a solution satisfying $\frac{2}{3} c^∗$ edges with a probability
-$p≥\frac{1}{3·|E|}$ we use the algorithm from Section~\ref{section:Exercise1}
+Since we find a solution satisfying $\frac{2}{3} c^∗$ edges, with a probability
+$p≥\frac{1}{3·|E|}$, we use the algorithm from Section~\ref{section:Exercise1}
 together with a routine which checks the number of satisfied edges (runtime:
 $O(|E|)$, and run this code till we find an assignment which satisfies $≥
 \frac{2}{3} c^∗$ edges. The expected run time of this algorithm is
@@ -308,7 +308,7 @@ The following algorithm is a slightly modified version of the pseudo-code
 described in the document “Finding Cut Vertices and Biconnected Components with
 Depth First Search”~\cite{Finding_Cut_Vertices}. More information about the
 original algorithm by John Hopcroft and Robert Tarjan can be found at
-Wikipedia~\cite{Wikipedia_Connected_Components}.\\
+Wikipedia~\cite{Wikipedia_Connected_Components}.
 
 \paragraph{Pseudocode:}~
 
@@ -390,9 +390,10 @@ before.\\
 Instead of the minimum number of $3$ edges for each face, the number of
 edges for a face in a bipartite graph is at least $4$ (a graph with a face
 containing $3$ edges is never bipartite):
-\[
-    2 · |E| = ∑_{i≥4} i · Fᵢ \quad i…\text{Number of edges of the face }Fᵢ\\
-\]
+\begin{align*}
+    2 · |E| = ∑_{i≥4} i · Fᵢ &\quad i…\text{Number of edges of the face }Fᵢ\\
+                             &\quad F_i…\text{Number of Faces with i edges}
+\end{align*}
 The number of edges in each face is bigger or equal to $4$:
 \begin{align*}
       4 · ∑_{i≥4} Fᵢ    &≤ ∑_{i≥4} i · Fᵢ\\
@@ -417,7 +418,7 @@ average degree $d_{avg}$ has to be greater or equal to $6$:\\
     d_{avg} = \frac{2|E|}{|V|} ≥ 6
 \]
 In the first sub-exercise we already used Euler’s formula to show that $E ≤
-3·|V| - 6$ holds for each simple, planar graph:
+3·|V| - 6$ holds for each simple, planar graph with $|V|≥3$:
 \begin{align*}
     |E|                 &≤ 3·|V| - 6    &&\biggm| ~· 2\\
     2·|E|               &≤ 6·|V| - 12   &&\biggm| ~: |V|\\
@@ -436,7 +437,7 @@ computed efficiently?
 \subsection{Solution}
 
 Finding the longest path can be translated to finding the shortest path in a
-copy of the graph, where all edge weights are multiplied by $-1$. This might
+copy of the graph, in which all edge weights are multiplied by $-1$. This might
 lead to a graph which contains negative weight cycles. This in turn means that
 the problem of finding the longest path is $\mathcal{NP}$
 complete~\cite{Algorithmics_Slides} and can therefore not computed using an
@@ -789,11 +790,11 @@ to $i$ in round $i$.\\
 To get the shortest path to some node $v$ we check all incoming edges to a
 node. Let us assume the delay of the incoming arc $(u,v)$ is $d_{uv}$. We check
 now if the weight of the shortest path to node $u$ in round $i-d_{uv}$ plus the
-weight of the arc is smaller than the current shortest path $u$. If that is the
+weight of the arc is smaller than the current shortest path $u$. If this is the
 case we replace the shortest path to node $u$ with the new value.\\
 
 We now apply this algorithm to the graph shown in
-Figure~\ref{figure:Delay_Shortest_Path}. We use node “A” as source:
+Figure~\ref{figure:Delay_Shortest_Path}. We use node “A” as source which leads us to the values given in Table~\ref{figure:Delay_Shortest_Path}.\\
 
 \begin{table}[htbp]
     \caption{
@@ -822,19 +823,24 @@ Figure~\ref{figure:Delay_Shortest_Path}. We use node “A” as source:
     \label{table:Delay_Shortest_Path}
 \end{table}
 
-To get the shortest path we just select $δ$ for the sink node and calculate the
-way back. For example if we want to get the shortest path to node $F$ with the
-delay constraint $9$ we see that the value for the shortest path ($5$) just
-changed in the row before. This means we that in the step before we selected a
-new edge. This edge has to be $(D,F)$ with weight $1$, since the delay of the
-other possible edge is larger than the delay constraint $9$.\\
+To get the shortest path to a certain node we just select $δ$ for this node and
+calculate the way back.\\
 
-We now go to the column for the shortest for $D$ and check in which row the
+For example, lets us assume we want to get the shortest path to node $F$ with
+the delay constraint $9$. We see that the value for the shortest path ($5$) in
+column $δ_F$ just changed from the value in the row before. This means we that
+in the step before we selected a new edge. This edge has to be $(D,F)$ with
+weight $1$, since the delay of the other possible edge $(E,F)$ is larger than
+the delay constraint $9$.\\
+
+We now go to the column for the shortest path to $D$ and check in which row the
 value changed from $4$ to a higher value. This was the case in the row with
-delay $7$. This in turn means that we selected edge $(B,D)$ in the step before.
+delay $7$. This in turn means that we selected edge $(B,D)$ in the step
+before.\\
+
 We now check the column for $B$ and after that the column for $C$. In the end
-we get the shortest path $A-C-B-D-F$ to the node $F$ if the we restrict the
-delay constrain to a maximum value of $9$.
+we get the shortest path $A-C-B-D-F$ to the node $F$, if the we restrict the
+delay constraint to a maximum value of $9$.
 
 \begin{figure}[htbp]
     \caption{Example graph for the Delay Constrained Shortest Path problem}
