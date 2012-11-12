@@ -38,7 +38,7 @@
 
 \newcommand{\Title}{Algorithmics}
 \newcommand{\TitleDescription}{Exercises}
-\newcommand{\Version}{2}
+\newcommand{\Version}{3}
 \newcommand{\Subject}{Solutions for the exercises of the course “Algorithmics”}
 \newcommand{\KeyWords}{randomized algorithms, graph theory}
 \newcommand{\LeftFooter}{Algorithmics}
@@ -295,6 +295,37 @@ together with a routine which checks the number of satisfied edges (runtime:
 $O(|E|)$, and run this code till we find an assignment which satisfies $≥
 \frac{2}{3} c^∗$ edges. The expected run time of this algorithm is
 $O(3·|E|)·O(|V|+|E|)=O(|E|^2+|V|)$.
+
+\section{Exercise 6 (Cut Vertices)}
+
+Let $G = (V, E)$ be a connected, undirected graph. A cut vertex of $G$ is a
+vertex whose removal disconnects $G$. Describe a linear time, i.e., $O(|V | +
+|E|)$, algorithm to identify all cut vertices of $G$.
+
+\subsection{Solution}
+
+The following algorithm is a slightly modified version of the pseudo-code
+described in the document “Finding Cut Vertices and Biconnected Components with
+Depth First Search”~\cite{Finding_Cut_Vertices}. More information about the
+original algorithm by John Hopcroft and Robert Tarjan can be found at
+Wikipedia~\cite{Wikipedia_Connected_Components}.\\
+
+\paragraph{Pseudocode:}~
+
+\begin{leftbar}
+    \input{Code/cut_vertices}
+\end{leftbar}
+
+Figure~\ref{figure:Cut_Vertices}~\cite{Solutions_Exercise1_Hamboeck} shows the
+result of the pseudo code applied to an example graph.
+
+\begin{figure}[htbp]
+    \caption{Example Graph with cut vertices C and D}
+    \vskip 0.2cm
+    \centering
+    \includegraphics[width=0.9\textwidth]{Figures/Cut_Vertices}
+    \label{figure:Cut_Vertices}
+\end{figure}
 
 \section{Exercise 7 (Planar Graphs)}
 

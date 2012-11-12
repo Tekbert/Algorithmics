@@ -76,9 +76,9 @@ function convert_to_tex()
 input_dir="../Pseudocode/"
 output_dir="../Code/"
 # e.g. "hello.sh"
-input_files=("color3.py")
+input_files=("color3.py" "cut_vertices.py")
 # e.g. "hello"
-output_files=("color3")
+output_files=("color3" "cut_vertices")
 
 # Convert the files
 convert_to_tex
