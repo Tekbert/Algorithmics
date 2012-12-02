@@ -894,6 +894,51 @@ nodes reached? Show the content of the priority queue at each iteration.
     \label{table:A_Star}
 \end{table}
 
+\section{Exercise 9 (A* Algorithm for an Euclidean Graph)}
+
+Consider an undirected graph whose nodes correspond to points in the Euclidean
+plane. Instead of applying the Euclidean distance in a heuristic $h(x)$, we use
+its square, i.e. $h(x) = (x₁ − t₁)² + (x₂ − t₂)²$, where $x = (x₁, x₂) ∈ V$ is
+an arbitrary node and $t = (t₁, t₂)$ the target node. What might be a
+motivation for doing this? Is the corresponding $A∗$ algorithm still guaranteed
+to yield a shortest path? Prove or disprove this. How about monotonicity?
+
+\subsection{Solution}
+
+The squared Euclidean distance might be used to progressively place greater
+weight on points that are farther apart. This means that $A∗$ should check out
+less nodes and therefore finish faster~\cite{Wikipedia_Euclidean_Distance}.
+Another reason for using the square euclidean distance might be the relative
+large computational cost of taking the square root of a
+number~\cite{Amit_A_Star}.\\
+
+Figure~\ref{figure:Exercise_2_9_Monotonicity} shows that the heuristic is not
+monotonic.
+
+\begin{figure}[htbp]
+    \caption{This graph shows that the square euclidean distance is not a
+             monotonic heuristic}
+    \vskip 0.2cm
+    \centering
+    \includegraphics[width=0.5\textwidth]{Figures/Exercise_2_9_Monotonicity}
+    \label{figure:Exercise_2_9_Monotonicity}
+\end{figure}
+
+The heuristic is not admissible since it returns an \emph{upper bound} for the
+distance to a certain node. If we use the squared euclidean distance as
+heuristic in the $A∗$ algorithm we might not always get the shortest path as
+Figure~\ref{figure:Exercise_2_9_Wrong_Path} shows.\\
+
+\begin{figure}[htbp]
+    \caption{Using the squared euclidean distance as heuristic might lead to a
+             wrong result for the shortest path}
+    \vskip 0.2cm
+    \centering
+    \includegraphics[width=0.5\textwidth]{Figures/Exercise_2_9_Wrong_Path}
+    \label{figure:Exercise_2_9_Wrong_Path}
+\end{figure}
+
+
 \section{Exercise 10 (Cardinality Bipartite Matching)}
 \label{section:Exercise_2_10}
 
