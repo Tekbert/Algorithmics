@@ -2,7 +2,7 @@
 
 % -- Document Class ------------------------------------------------------------
 
-\documentclass[a4paper, 12pt]{article}
+\documentclass[a4paper, 12pt]{report}
 
 % -- Packages ------------------------------------------------------------------
 
@@ -38,7 +38,7 @@
 
 \newcommand{\Title}{Algorithmics}
 \newcommand{\TitleDescription}{Exercises}
-\newcommand{\Version}{4}
+\newcommand{\Version}{5}
 \newcommand{\Subject}{Solutions for the exercises of the course “Algorithmics”}
 \newcommand{\KeyWords}{Randomized Algorithms, Graph Theory, Shortest Path}
 \newcommand{\LeftFooter}{Algorithmics}
@@ -165,33 +165,41 @@
 
 % -- Table of Contents ---------------------------------------------------------
 
-% Set section format for table of contents
-\titleformat{\section}{\sffamily\bfseries}{}{0pt}{}[{\color{aqua}\hrule}]
+% Modify space before and after a chapter
+\titlespacing*{\chapter}{0pt}{-30pt}{10pt}
+% Set chapter format for table of contents
+\titleformat{\chapter}{\sffamily\bfseries\large}{}{0pt}{}[{\color{aqua}\hrule}]
 
 % Set separation of dots between name of section and page number to such a high
 % value that there will be no points in the table of contents
 \makeatletter \renewcommand{\@dotsep}{10000} \makeatother
 % Use blank header and footer
 \pagestyle{empty}
+% Suppress page number
+\pagenumbering{gobble}
 % Start on new page
 \newpage
 % The table of contents starts at the second page
 \setcounter{page}{2}
+
 % Set table of contents
 \tableofcontents
+% Suppress page number
+\thispagestyle{empty}
 
 % -- Section & Paragraph Style -------------------------------------------------
 
-% Set format for section
-\titleformat{\section}
-    {\large\sffamily\bfseries}  % Large, bold, sans serif font for section
-    {}                          % No format applied to whole title
-    {0pt}                       % No separation between label and title
-    {\thesection~·~}            % Start with section number
-    [{\color{aqua}\hrule}]      % Underline with blue ruler
+\titleformat{\chapter}
+	{\Large\sffamily\bfseries}	% Bold, large, sans serif font for section
+	{}							% No format applied to whole title
+	{0pt}						% No separation between label and title
+	{\thechapter ~•~ }			% Start with chapter number
+	% Underline with blue ruler, Use default style for headers, footers
+	[{\color{aqua}\hrule}\thispagestyle{scrheadings}]
 
 % Set format for other sections and paragraphs
 % Color = orchid, Font = bold, sans serif
+\titleformat*{\section}{\color{orchid}\sffamily\bfseries}
 \titleformat*{\subsection}{\color{orchid}\sffamily\bfseries}
 \titleformat*{\subsubsection}{\color{orchid}\sffamily\bfseries}
 \titleformat*{\paragraph}{\color{orchid}\sffamily\bfseries}
@@ -205,6 +213,8 @@
 \pagestyle{scrheadings}
 
 % -- Text ----------------------------------------------------------------------
+
+\newpage\chapter{Exercise Session 1}
 
 \section{Exercise 1 (Randomized 3-Coloring Algorithm)}
 \label{section:Exercise1}
@@ -848,6 +858,64 @@ delay constraint to a maximum value of $9$.
     \centering
     \includegraphics[width=0.7\textwidth]{Figures/Delay_Shortest_Path}
     \label{figure:Delay_Shortest_Path}
+\end{figure}
+
+\chapter{Exercise Session 2}
+
+\section{Exercise 7 (A* Algorithm)}
+
+Perform the $A∗$ algorithm on the following graph in order to find a shortest
+path from $s$ to $t$. In which order are the nodes expanded, and when are which
+nodes reached? Show the content of the priority queue at each iteration.
+
+\begin{center}
+    \includegraphics[width=0.6\textwidth]{Figures/Exercise_2_7}
+\end{center}
+
+\subsection{Solution}
+
+\begin{table}[htbp]
+    \caption{$A*$ algorithm applied to the graph of Exercise 7}
+    \begin{center}
+        \begin{tabular}{lll}
+            Step & Calculations for $f'$    & Priority Queue\\
+            \hline
+            1    &                          & \highlight{(s, 10)}\\
+            2    & (a, 2+3), (d, 3+7)       & \highlight{(a, 5)}, (d, 10)\\
+            3    & (b, 3+2), (d, 3+7)       & \highlight{(b, 5)}, (d, 10)\\
+            4    & (c, 11+1), (t, 13+0)     & (c, 12), \highlight{(d, 10)},
+                                              (t, 13)\\
+            5    & (b, 5+2), (c, 10+1)      & \highlight{(b, 7)}, (c, 11),
+                                              (t, 13)\\
+            6    & (c, 13+1), (t, 15)       & \highlight{(c, 11)}, (t, 13)\\
+            7    & (t, 11+0)                & \highlight{(t, 13)}\\
+        \end{tabular}
+    \end{center}
+    \label{table:A_Star}
+\end{table}
+
+\section{Exercise 10 (Cardinality Bipartite Matching)}
+
+Apply the algorithm for finding a maximum cardinality matching to the following
+bipartite graph and explain each step.
+
+\begin{center}
+    \includegraphics[width=0.5\textwidth]{Figures/Exercise_2_10}
+\end{center}
+
+\subsection{Solution}
+
+Figure~\ref{figure:Exercise_2_10_Maximum_Matching} the steps taken to find the
+maximum bipartite matching in the given graph. Since there are usually multiple
+paths from U' to W' there are also multiple possibilities to find the maximum
+matching.
+
+\begin{figure}[htbp]
+    \caption{Application of the “Cardinality Bipartite Matching” algorithm}
+    \vskip 0.2cm
+    \centering
+    \includegraphics[width=\textwidth]{Figures/Exercise_2_10_Maximum_Matching}
+    \label{figure:Exercise_2_10_Maximum_Matching}
 \end{figure}
 
 % -- Bibliography --------------------------------------------------------------
