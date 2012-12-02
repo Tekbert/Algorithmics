@@ -895,6 +895,7 @@ nodes reached? Show the content of the priority queue at each iteration.
 \end{table}
 
 \section{Exercise 10 (Cardinality Bipartite Matching)}
+\label{section:Exercise_2_10}
 
 Apply the algorithm for finding a maximum cardinality matching to the following
 bipartite graph and explain each step.
@@ -917,6 +918,53 @@ matching.
     \includegraphics[width=\textwidth]{Figures/Exercise_2_10_Maximum_Matching}
     \label{figure:Exercise_2_10_Maximum_Matching}
 \end{figure}
+
+\section{Exercise 11 (Cardinality Bipartite Matching / Vertex Cover)}
+
+Show that a minimum vertex cover can be found in a bipartite graph in
+polynomial time.
+
+\subsection{Solution}
+
+We already know that we can find a maximum matching for a bipartite graph in
+polynomial time. We now need to show that we can use this maximum matching to
+get a minimum vertex cover.\\
+
+For this purpose we partition the nodes of the graph into sets
+$Sᵢ$~\cite{Wikipedia_Koenigs_Theorem}. The set $S₀$ contains all nodes which
+are not part of the matching. After that we add all nodes which are adjacent to
+the nodes $S₀$ to the set $S₁$. The edges between the set $S₀$ and $S₁$ are
+obviously not contained in the matching. For the set $S₂$ we take all nodes
+adjacent to the nodes contained in $S₁$ which are part of the matching. For
+$S_3$ we take all nodes which were not already selected and are not part of the
+matching. We continue this approach till all nodes are part of one set $Sᵢ$.\\
+
+We get the minimal vertex cover by using all nodes contained in the odd sets.
+Since one endpoint of a matched edge is contained in an even numbered set and
+the other one in an odd numbered set, the cardinality of of the matching is
+equal to the cardinality of our minimum vertex cover. König’s Theorem states
+that this is indeed the correct cardinality for the minimum vertex cover.\\
+
+Figure~\ref{figure:Exercise_2_11} shows the partitioning of a bipartite graph
+using the described algorithm.
+
+\begin{figure}[htbp]
+    \caption{Minimal Vertex Cover for the graph from
+             Exercise~\ref{section:Exercise_2_10}}
+    \vskip 0.2cm
+    \centering
+    \includegraphics[width=0.3\textwidth]{Figures/Exercise_2_11}
+    \label{figure:Exercise_2_11}
+\end{figure}
+
+We now have to show that the chosen vertices indeed are a correct vertex cover.
+Since we have taken exactly one endpoint of each matched node we know that all
+matched edges are covered. All unmatched edges are also covered if there are no
+unmatched edges between node in an even numbered set. This can not be the case
+since otherwise we could use this edge to get a larger matching. If there would
+be a edge connecting two vertices $u$ and $v$ in an even numbered subset it
+would join two alternating paths and we could get a larger matching by
+switching the edges of this new path.
 
 % -- Bibliography --------------------------------------------------------------
 
