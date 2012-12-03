@@ -5,8 +5,8 @@
 ## @group		Utilities
 ## @details		Converts sourcecode files to LaTeX files with syntax
 ##				highlighting
-## @version		2
-## @date		2012-06-11
+## @version		3
+## @date		2012-12-03
 ## @author		René Schwaiger (sanssecours@f-m.fm)
 # ------------------------------------------------------------------------------
 
@@ -17,15 +17,15 @@ EXIT_SUCCESS="0"
 
 # -- Functions -----------------------------------------------------------------
 
-## Checks the status of the last command and exits there was an error
+## Checks the status of the last command and exits if there was an error
 ##
-## @reads	error_message
+## @param $0	error_message
 ##				The message which should be displayed if there was an error
 function exit_on_failure()
 {
 	if [ "$?" != "$EXIT_SUCCESS" ]; then
 		echo -n "ERROR: "
-		echo $error_message
+		echo -e "${1}"
 		exit 1
 	fi
 }
@@ -63,8 +63,7 @@ function convert_to_tex()
 			$convert "$code_file" > "$tex_file"
 
 			# Check for error
-			error_message="Could not convert "${tex_file}""
-			exit_on_failure
+			exit_on_failure "Could not convert "${code_file}""
 
 			# Display conversion step on success
 			echo "${code_file} => ${tex_file}"
