@@ -40,7 +40,7 @@
 
 \newcommand{\Title}{Algorithmics}
 \newcommand{\TitleDescription}{Exercises}
-\newcommand{\Version}{5}
+\newcommand{\Version}{6}
 \newcommand{\Subject}{Solutions for the exercises of the course “Algorithmics”}
 \newcommand{\KeyWords}{Randomized Algorithms, Graph Theory, Shortest Path}
 \newcommand{\LeftFooter}{Algorithmics}
@@ -921,6 +921,39 @@ Find in the given flow network $N$ with lower bounds.
 \begin{center}
     \includegraphics[width=0.5\textwidth]{Figures/Exercise_2_3_c}
 \end{center}
+
+\section{Exercise 4 (Maximum Flow with Lower Bounds)}
+
+Given is a flow network $N$ with nonnegative lower capacity bounds. Find an
+algorithm for combining a feasible flow f with a maximum flow $f^+$ in $G_f$ to
+a maximum flow $f^∗$ in the original network $N$. Consider that there can be
+both arcs $(u, v)$ and $(v, u)$ with different lower and upper capacity bounds.
+(cf. Ex. 3).
+
+\subsection{Solution}
+
+We can just combine the maximum flow $f^*$ and the feasible flow $f^+$ by
+adding them. Since there exists the possibility that the maximum flow for a
+certain edge is exceeded we use the following algorithm to fix the combination
+of the flows~\cite{Informatik_Forum_Combine_Flows}:
+
+\begin{leftbar}
+    \input{Code/combine_flows}
+\end{leftbar}
+
+We now show that this algorithm does not change the flow of an edge $b=(u,v)$,
+in such a way that the flow of this node is smaller than the minimum capacity
+of the edge. Let us say that $a=(v,u)$ is the edge where the flow was to large
+and therefore had to be reduced.
+\begin{align*}
+    f'(x) &= f(x) + f^+(x)\\[10pt]
+    \text{Assumption: } &∃ f'(b) - x < ς^L(b)\\[10pt]
+    x &> f'(b) - ς^L(b)\\
+    x &= f'(a) - ς^U(a)\\
+    f'(a) - ς^U(a) &> f'(b) - ς^L(b)\\
+    0 &> (ς^U(a) - f'(a)) + f'(b) - ς^L(b)\\
+    0 &> r_{f'}(a)
+\end{align*}
 
 \section{Exercise 7 (A* Algorithm)}
 
