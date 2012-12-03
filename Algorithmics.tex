@@ -864,6 +864,30 @@ delay constraint to a maximum value of $9$.
 
 \chapter{Exercise Session 2}
 
+\section{Exercise 1 (Max-Flow Min-Cut Theorem)}
+
+Let $f$ be a feasible flow in the flow network $N = (V,A,ς,s,t)$. Show for all
+sets of nodes $S ⊂ V$ with $s,t ∉ S$ that:
+
+\[
+    f(S, \bar{S}) − f(\bar{S}, S) = 0 \quad (\bar{S} = V ~\backslash~ S).
+\]
+
+\subsection{Solution}
+
+\begin{align*}
+    \text{Flow conservation: } &
+    ∑_{v ∈ V} f(u,v) = 0 \quad ∀ u ∈ V ~\backslash~ \{s, t\}\\
+    f(S,V) &=
+        ∑_{u ∈ S} \underbrace{∑_{v ∈ V} f(u, v)}_{=0} = ∑_{u ∈ S} 0 = 0 \\
+    f(S, V) &=
+        \underbrace{f(S,S)}_{=0} + f(S, \bar{S}) = 0 ⇒ f(S,\bar{S}) = 0 \\[5pt]
+    \text{Skew Symmetry: }& f(u,v) = - f(v,u) \quad ∀ u,v ∈ V\\[2pt]
+    f(S, \bar{S}) &= - f(\bar{S}, S) = 0 \\
+    f(S, \bar{S}) − f(\bar{S}, S) &= 0   \\
+    0 - 0 &= 0
+\end{align*}
+
 \section{Exercise 3 (Maximum Flow with Lower Bounds)}
 
 Find in the given flow network $N$ with lower bounds.
@@ -924,7 +948,7 @@ nodes reached? Show the content of the priority queue at each iteration.
             5    & (b, 5+2), (c, 10+1)      & \highlight{(b, 7)}, (c, 11),
                                               (t, 13)\\
             6    & (c, 13+1), (t, 15)       & \highlight{(c, 11)}, (t, 13)\\
-            7    & (t, 11+0)                & \highlight{(t, 13)}\\
+            7    & (t, 11+0)                & \highlight{(t, 11)}\\
         \end{tabular}
     \end{center}
     \label{table:A_Star}
