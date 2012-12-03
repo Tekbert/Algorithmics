@@ -987,6 +987,55 @@ nodes reached? Show the content of the priority queue at each iteration.
     \label{table:A_Star}
 \end{table}
 
+\section{Exercise 8 (A* Algorithm for 8-Puzzle)}
+
+Consider the 8-Puzzle discussed in the lecture. Show whether or not the two
+suggested heuristics $h₁$ and $h₂$ are admissible and/or monotonic.
+
+\subsection{Solution}
+
+\paragraph{Heuristic 1: Number of Tiles in wrong position}
+
+\subparagraph{Admissible}
+
+Yes, since we need at least number of tiles in wrong position moves to get a
+solution. The heuristic is optimistic (lower bound).
+
+\subparagraph{Monotonic}
+
+No, since we might need to move a tile to get to our solution which will
+increase the heuristic value (see
+Figure~\ref{figure:Exercise_2_8_h1_Monotonicity}).
+
+\begin{figure}[htbp]
+    \caption{$h₁$ is not monotonic}
+    \vskip 0.2cm
+    \centering
+    \includegraphics[width=0.5\textwidth]{Figures/Exercise_2_8_h1_Monotonicity}
+    \label{figure:Exercise_2_8_h1_Monotonicity}
+\end{figure}
+
+\paragraph{Heuristic 2: Sum of the Manhatten distance of each tile to its
+target location}
+
+\subparagraph{Admissible}
+
+Yes, since we need to move each tile at least “Manhatten distance” times.
+
+\subparagraph{Monotonic}
+
+No since we might need to move a tile to get to the solution, which will
+increase the heuristic value (see
+Figure~\ref{figure:Exercise_2_8_h2_Monotonicity}).
+
+\begin{figure}[htbp]
+    \caption{$h₁$ is not monotonic}
+    \vskip 0.2cm
+    \centering
+    \includegraphics[width=0.5\textwidth]{Figures/Exercise_2_8_h2_Monotonicity}
+    \label{figure:Exercise_2_8_h2_Monotonicity}
+\end{figure}
+
 \section{Exercise 9 (A* Algorithm for an Euclidean Graph)}
 
 Consider an undirected graph whose nodes correspond to points in the Euclidean
