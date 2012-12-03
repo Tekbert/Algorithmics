@@ -80,6 +80,8 @@ input_files=("color3.py" "cut_vertices.py")
 # e.g. "hello"
 output_files=("color3" "cut_vertices")
 
+# Create ouptut directory if it does not exist already
+mkdir -p "$output_dir"
 # Convert the files
 convert_to_tex
 
