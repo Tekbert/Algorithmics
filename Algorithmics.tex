@@ -955,6 +955,36 @@ and therefore had to be reduced.
     0 &> r_{f'}(a)
 \end{align*}
 
+\section{Exercise 6 (Maximum Flow: Preflow-Push Algorithm)}
+
+Prove that the worst-case runtime of the generic Preflow-Push algorithm is not
+affected when using the improvement with breadth-first search (\texttt{BFS})
+(see \texttt{flows.pdf}, slide 116) if the BFS is only run every $αn$
+\texttt{lift()} operations. How often can the BFS be run at most without
+changing the worst-case runtime?
+
+\subsection{Solution}
+
+We know that the worst case run time of the standard Preflow-Push algorithm is
+$O(n² · m)$. We also know that \texttt{lift()} is called not more than $2·n²$
+times. The additional time used by the BFS algorithm used on every $αn$ run of
+the \texttt{lift()} operation is therefore given by the following formula:
+
+\[
+    \underbrace{
+        \underbrace{2·n²}_{\text{max calls of \texttt{lift()}}}
+        \frac{1}{αn}
+    }_{\text{\# calls of BFS}}
+    \underbrace{β·m}_{\text{worst case runtime of BFS}}
+    = \frac{β}{α} · n · m = c · n · m
+\]
+
+This means that the additional runtime added by the \texttt{BFS} does not
+change the worst case running time of the algorithm. The worst case running
+time of the algorithm should only change if we call BFS more more often than
+\texttt{lift()}. From that we follow that $α = O(1/n)$ should be true or
+otherwise the worst case running time might change.
+
 \section{Exercise 7 (A* Algorithm)}
 
 Perform the $A∗$ algorithm on the following graph in order to find a shortest
