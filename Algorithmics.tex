@@ -866,7 +866,7 @@ delay constraint to a maximum value of $9$.
 
 \section{Exercise 1 (Max-Flow Min-Cut Theorem)}
 
-Let $f$ be a feasible flow in the flow network $N = (V,A,ς,s,t)$. Show for all
+Let $f$ be a feasible flow in the flow network $𝒩 = (V,A,ς,s,t)$. Show for all
 sets of nodes $S ⊂ V$ with $s,t ∉ S$ that:
 
 \[
@@ -876,26 +876,26 @@ sets of nodes $S ⊂ V$ with $s,t ∉ S$ that:
 \subsection{Solution}
 
 \begin{align*}
-    \text{Flow conservation: } &
-    ∑_{v ∈ V} f(u,v) = 0 \quad ∀ u ∈ V ~\backslash~ \{s, t\}\\
+    \text{\textbf{Flow conservation}}&:~
+    ∑_{v ∈ V} f(u,v) = 0 \quad ∀ u ∈ V ~\backslash~ \{s, t\} \\[10pt]
     f(S,V) &=
         ∑_{u ∈ S} \underbrace{∑_{v ∈ V} f(u, v)}_{=0} = ∑_{u ∈ S} 0 = 0 \\
     f(S, V) &=
         \underbrace{f(S,S)}_{=0} + f(S, \bar{S}) = 0 ⇒ f(S,\bar{S}) = 0 \\[5pt]
-    \text{Skew Symmetry: }& f(u,v) = - f(v,u) \quad ∀ u,v ∈ V\\[2pt]
+    \text{\textbf{Skew Symmetry}}&:~ f(u,v) = - f(v,u) \quad ∀ u,v ∈ V \\[10pt]
     f(S, \bar{S}) &= - f(\bar{S}, S) = 0 \\
-    f(S, \bar{S}) − f(\bar{S}, S) &= 0   \\
+    f(S, \bar{S}) − f(\bar{S}, S) &= 0 \\
     0 - 0 &= 0
 \end{align*}
 
 \section{Exercise 3 (Maximum Flow with Lower Bounds)}
 
-Find in the given flow network $N$ with lower bounds.
+Find in the given flow network $𝒩$ with lower bounds.
 
 \begin{enumerate}[a)]
     \item a feasible flow $f$
     \item a maximum flow $f^+$ in the residual graph $G_f$ based on $f$
-    \item combine $f$ and $f^+$ to a maximum flow $f^∗$ for $N$.
+    \item combine $f$ and $f^+$ to a maximum flow $f^∗$ for $𝒩$.
 \end{enumerate}
 
 \begin{center}
@@ -924,27 +924,38 @@ Find in the given flow network $N$ with lower bounds.
 
 \section{Exercise 4 (Maximum Flow with Lower Bounds)}
 
-Given is a flow network $N$ with nonnegative lower capacity bounds. Find an
-algorithm for combining a feasible flow f with a maximum flow $f^+$ in $G_f$ to
-a maximum flow $f^∗$ in the original network $N$. Consider that there can be
+Given is a flow network $𝒩$ with nonnegative lower capacity bounds. Find an
+algorithm for combining a feasible flow $f$ with a maximum flow $f^+$ in $G_f$
+to a maximum flow $f^∗$ in the original network $𝒩$. Consider that there can be
 both arcs $(u, v)$ and $(v, u)$ with different lower and upper capacity bounds.
 (cf. Ex. 3).
 
 \subsection{Solution}
 
 We can just combine the maximum flow $f^*$ and the feasible flow $f^+$ by
-adding them. Since there exists the possibility that the maximum flow for a
-certain edge is exceeded we use the following algorithm to fix the combination
-of the flows~\cite{Informatik_Forum_Combine_Flows}:
+adding them. There exists the possibility that the maximum flow for a certain
+edge is exceeded (see Figure~\ref{figure:Exercise_2_4_Counterexample}).
+
+\begin{figure}[htbp]
+    \caption{Simply adding $f$ and $f^*$ might lead to an overflow}
+    \vskip 0.2cm
+    \centering
+    \includegraphics[width=\textwidth]{Figures/Exercise_2_4_Counterexample}
+    \label{figure:Exercise_2_4_Counterexample}
+\end{figure}
+
+We use the following algorithm to fix the combination of the
+flows~\cite{Informatik_Forum_Combine_Flows}:
 
 \begin{leftbar}
     \input{Code/combine_flows}
 \end{leftbar}
 
 We now show that this algorithm does not change the flow of an edge $b=(u,v)$,
-in such a way that the flow of this node is smaller than the minimum capacity
+in such a way that the flow over this edge is smaller than the minimum capacity
 of the edge. Let us say that $a=(v,u)$ is the edge where the flow was to large
 and therefore had to be reduced.
+
 \begin{align*}
     f'(x) &= f(x) + f^+(x)\\[10pt]
     \text{Assumption: } &∃ f'(b) - x < ς^L(b)\\[10pt]
@@ -954,6 +965,11 @@ and therefore had to be reduced.
     0 &> (ς^U(a) - f'(a)) + f'(b) - ς^L(b)\\
     0 &> r_{f'}(a)
 \end{align*}
+
+Since the residual flow is always positive, $0 > r_{f'}(a)$ must be false. This
+leads to the conclusion that our assumption is false, and therefore we now
+know, that the proposed algorithm will not undermine the minimum capacity of
+the edge $b$.
 
 \section{Exercise 6 (Maximum Flow: Preflow-Push Algorithm)}
 
@@ -966,7 +982,7 @@ changing the worst-case runtime?
 \subsection{Solution}
 
 We know that the worst case run time of the standard Preflow-Push algorithm is
-$O(n² · m)$. We also know that \texttt{lift()} is called not more than $2·n²$
+$O(n² · m)$. We also know that \texttt{lift()} is called less than $2·n²$
 times. The additional time used by the BFS algorithm used on every $αn$ run of
 the \texttt{lift()} operation is therefore given by the following formula:
 
@@ -983,7 +999,8 @@ This means that the additional runtime added by the \texttt{BFS} does not
 change the worst case running time of the algorithm. The worst case running
 time of the algorithm should only change if we call BFS more more often than
 \texttt{lift()}. From that we follow that $α = O(1/n)$ should be true or
-otherwise the worst case running time might change.
+otherwise the worst case running time might of the whole Preflow-Push algorithm
+might change.
 
 \section{Exercise 7 (A* Algorithm)}
 
@@ -1028,41 +1045,40 @@ suggested heuristics $h₁$ and $h₂$ are admissible and/or monotonic.
 
 \subparagraph{Admissible}
 
-Yes, since we need at least number of tiles in wrong position moves to get a
+Yes, since we need at least “number of tiles in wrong position” moves to get a
 solution. The heuristic is optimistic (lower bound).
 
 \subparagraph{Monotonic}
 
-No, since we might need to move a tile to get to our solution which will
-increase the heuristic value (see
+No, since we might need to move a tile, which will increase the heuristic
+value, to get to our solution (see
 Figure~\ref{figure:Exercise_2_8_h1_Monotonicity}).
 
 \begin{figure}[htbp]
     \caption{$h₁$ is not monotonic}
     \vskip 0.2cm
     \centering
-    \includegraphics[width=0.5\textwidth]{Figures/Exercise_2_8_h1_Monotonicity}
+    \includegraphics[width=0.7\textwidth]{Figures/Exercise_2_8_h1_Monotonicity}
     \label{figure:Exercise_2_8_h1_Monotonicity}
 \end{figure}
 
-\paragraph{Heuristic 2: Sum of the Manhatten distance of each tile to its
-target location}
+\paragraph{Heuristic 2: Sum of Manhattan distance to target}
 
 \subparagraph{Admissible}
 
-Yes, since we need to move each tile at least “Manhatten distance” times.
+Yes, since we need to move each tile at least “Manhattan distance” times.
 
 \subparagraph{Monotonic}
 
-No since we might need to move a tile to get to the solution, which will
-increase the heuristic value (see
+No, since we might need to move a tile, which will increase the heuristic
+value, to get to our solution (see
 Figure~\ref{figure:Exercise_2_8_h2_Monotonicity}).
 
 \begin{figure}[htbp]
-    \caption{$h₁$ is not monotonic}
+    \caption{$h₂$ is not monotonic}
     \vskip 0.2cm
     \centering
-    \includegraphics[width=0.5\textwidth]{Figures/Exercise_2_8_h2_Monotonicity}
+    \includegraphics[width=0.7\textwidth]{Figures/Exercise_2_8_h2_Monotonicity}
     \label{figure:Exercise_2_8_h2_Monotonicity}
 \end{figure}
 
@@ -1078,8 +1094,9 @@ to yield a shortest path? Prove or disprove this. How about monotonicity?
 \subsection{Solution}
 
 The squared Euclidean distance might be used to progressively place greater
-weight on points that are farther apart. This means that $A∗$ should check out
-less nodes and therefore finish faster~\cite{Wikipedia_Euclidean_Distance}.
+weight on points that are farther apart~\cite{Wikipedia_Euclidean_Distance}.
+This means that $A∗$ should check out less nodes and therefore finish faster.\\
+
 Another reason for using the square euclidean distance might be the relative
 large computational cost of taking the square root of a
 number~\cite{Amit_A_Star}.\\
@@ -1088,8 +1105,7 @@ Figure~\ref{figure:Exercise_2_9_Monotonicity} shows that the heuristic is not
 monotonic.
 
 \begin{figure}[htbp]
-    \caption{This graph shows that the square euclidean distance is not a
-             monotonic heuristic}
+    \caption{The square euclidean distance is not a monotonic heuristic}
     \vskip 0.2cm
     \centering
     \includegraphics[width=0.5\textwidth]{Figures/Exercise_2_9_Monotonicity}
@@ -1102,7 +1118,7 @@ heuristic in the $A∗$ algorithm we might not always get the shortest path as
 Figure~\ref{figure:Exercise_2_9_Wrong_Path} shows.\\
 
 \begin{figure}[htbp]
-    \caption{Using the squared euclidean distance as heuristic might lead to a
+    \caption{Using the squared euclidean distance as heuristic, might lead to a
              wrong result for the shortest path}
     \vskip 0.2cm
     \centering
@@ -1123,10 +1139,10 @@ bipartite graph and explain each step.
 
 \subsection{Solution}
 
-Figure~\ref{figure:Exercise_2_10_Maximum_Matching} the steps taken to find the
-maximum bipartite matching in the given graph. Since there are usually multiple
-paths from U' to W' there are also multiple possibilities to find the maximum
-matching.
+Figure~\ref{figure:Exercise_2_10_Maximum_Matching} shows the steps taken to
+find the maximum bipartite matching in the given graph. Since there are usually
+multiple paths from U' to W' there are also multiple possibilities to find the
+maximum matching.
 
 \begin{figure}[htbp]
     \caption{Application of the “Cardinality Bipartite Matching” algorithm}
@@ -1151,10 +1167,12 @@ For this purpose we partition the nodes of the graph into sets
 $Sᵢ$~\cite{Wikipedia_Koenigs_Theorem}. The set $S₀$ contains all nodes which
 are not part of the matching. After that we add all nodes which are adjacent to
 the nodes $S₀$ to the set $S₁$. The edges between the set $S₀$ and $S₁$ are
-obviously not contained in the matching. For the set $S₂$ we take all nodes
-adjacent to the nodes contained in $S₁$ which are part of the matching. For
-$S_3$ we take all nodes which were not already selected and are not part of the
-matching. We continue this approach till all nodes are part of one set $Sᵢ$.\\
+obviously not contained in the matching.\\
+
+For the set $S₂$ we take all nodes adjacent to the nodes contained in $S₁$
+which are part of the matching. For $S_3$ we take all nodes which were not
+already selected and are not part of the matching. We continue this approach
+till all nodes are part of one set $Sᵢ$.\\
 
 We get the minimal vertex cover by using all nodes contained in the odd sets.
 Since one endpoint of a matched edge is contained in an even numbered set and
@@ -1163,25 +1181,27 @@ equal to the cardinality of our minimum vertex cover. König’s Theorem states
 that this is indeed the correct cardinality for the minimum vertex cover.\\
 
 Figure~\ref{figure:Exercise_2_11} shows the partitioning of a bipartite graph
-using the described algorithm.
+using the described algorithm.\\
 
 \begin{figure}[htbp]
     \caption{Minimal Vertex Cover for the graph from
              Exercise~\ref{section:Exercise_2_10}}
     \vskip 0.2cm
     \centering
-    \includegraphics[width=0.3\textwidth]{Figures/Exercise_2_11}
+    \includegraphics[width=0.4\textwidth]{Figures/Exercise_2_11}
     \label{figure:Exercise_2_11}
 \end{figure}
 
 We now have to show that the chosen vertices indeed are a correct vertex cover.
 Since we have taken exactly one endpoint of each matched node we know that all
-matched edges are covered. All unmatched edges are also covered if there are no
-unmatched edges between node in an even numbered set. This can not be the case
-since otherwise we could use this edge to get a larger matching. If there would
-be a edge connecting two vertices $u$ and $v$ in an even numbered subset it
-would join two alternating paths and we could get a larger matching by
-switching the edges of this new path.
+matched edges are covered.\\
+
+All unmatched edges are also covered if there are no unmatched edges between
+node in an even numbered set. This can not be the case since otherwise we could
+use this edge to get a larger matching. If there would be a edge connecting two
+vertices $u$ and $v$ in an even numbered subset it would join two alternating
+paths and we could get a larger matching by switching the edges of this new
+path.
 
 % -- Bibliography --------------------------------------------------------------
 
