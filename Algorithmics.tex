@@ -40,7 +40,7 @@
 
 \newcommand{\Title}{Algorithmics}
 \newcommand{\TitleDescription}{Exercises}
-\newcommand{\Version}{6}
+\newcommand{\Version}{7}
 \newcommand{\Subject}{Solutions for the exercises of the course “Algorithmics”}
 \newcommand{\KeyWords}{Randomized Algorithms, Graph Theory, Shortest Path}
 \newcommand{\LeftFooter}{Algorithmics}
@@ -213,6 +213,8 @@
 \newpage
 % Display headers and footers
 \pagestyle{scrheadings}
+% Restore arabic page numbering
+\pagenumbering{arabic}
 
 % -- Text ----------------------------------------------------------------------
 
@@ -806,7 +808,8 @@ weight of the arc is smaller than the current shortest path $u$. If this is the
 case we replace the shortest path to node $u$ with the new value.\\
 
 We now apply this algorithm to the graph shown in
-Figure~\ref{figure:Delay_Shortest_Path}. We use node “A” as source which leads us to the values given in Table~\ref{figure:Delay_Shortest_Path}.\\
+Figure~\ref{figure:Delay_Shortest_Path}. We use node “A” as source which leads
+us to the values given in Table~\ref{figure:Delay_Shortest_Path}.\\
 
 \begin{table}[htbp]
     \caption{
@@ -932,7 +935,7 @@ both arcs $(u, v)$ and $(v, u)$ with different lower and upper capacity bounds.
 
 \subsection{Solution}
 
-We can just combine the maximum flow $f^*$ and the feasible flow $f^+$ by
+We can just combine the maximum flow $f^+$ and the feasible flow $f^+$ by
 adding them. There exists the possibility that the maximum flow for a certain
 edge is exceeded (see Figure~\ref{figure:Exercise_2_4_Counterexample}).
 
@@ -968,8 +971,8 @@ and therefore had to be reduced.
 
 Since the residual flow is always positive, $0 > r_{f'}(a)$ must be false. This
 leads to the conclusion that our assumption is false, and therefore we now
-know, that the proposed algorithm will not undermine the minimum capacity of
-the edge $b$.
+know, that the flow calculated by the proposed algorithm, will not undermine
+the minimum capacity of the edge $b$.
 
 \section{Exercise 6 (Maximum Flow: Preflow-Push Algorithm)}
 
@@ -1041,7 +1044,7 @@ suggested heuristics $h₁$ and $h₂$ are admissible and/or monotonic.
 
 \subsection{Solution}
 
-\paragraph{Heuristic 1: Number of Tiles in wrong position}
+\paragraph{Heuristic 1: Number of tiles in wrong position}
 
 \subparagraph{Admissible}
 
@@ -1050,17 +1053,17 @@ solution. The heuristic is optimistic (lower bound).
 
 \subparagraph{Monotonic}
 
-No, since we might need to move a tile, which will increase the heuristic
-value, to get to our solution (see
-Figure~\ref{figure:Exercise_2_8_h1_Monotonicity}).
-
-\begin{figure}[htbp]
-    \caption{$h₁$ is not monotonic}
-    \vskip 0.2cm
-    \centering
-    \includegraphics[width=0.7\textwidth]{Figures/Exercise_2_8_h1_Monotonicity}
-    \label{figure:Exercise_2_8_h1_Monotonicity}
-\end{figure}
+Yes. The following formula has to hold for monotonicity to be true:
+\[
+    h₁(x) ≤ w_{xy} + h₁(y) \quad ∀(x,y) ∈ A
+\]
+We know that $w_{xy}$ is always one.
+\[
+    h₁(x) ≤ 1 + h₁(y)
+\]
+Since we increase or decrease $h_1$ in each step by a maximum of one, the
+formula above should be true. From this we conclude that $h_1$ is indeed
+monotonic.
 
 \paragraph{Heuristic 2: Sum of Manhattan distance to target}
 
@@ -1070,17 +1073,8 @@ Yes, since we need to move each tile at least “Manhattan distance” times.
 
 \subparagraph{Monotonic}
 
-No, since we might need to move a tile, which will increase the heuristic
-value, to get to our solution (see
-Figure~\ref{figure:Exercise_2_8_h2_Monotonicity}).
-
-\begin{figure}[htbp]
-    \caption{$h₂$ is not monotonic}
-    \vskip 0.2cm
-    \centering
-    \includegraphics[width=0.7\textwidth]{Figures/Exercise_2_8_h2_Monotonicity}
-    \label{figure:Exercise_2_8_h2_Monotonicity}
-\end{figure}
+Yes. The argument for this is basically the same as the one for the
+monotonicity of $h₁$.
 
 \section{Exercise 9 (A* Algorithm for an Euclidean Graph)}
 
@@ -1205,6 +1199,9 @@ path.
 
 % -- Bibliography --------------------------------------------------------------
 
+\newpage
+% Suppress page number
+\pagenumbering{gobble}
 % Set section format for bibliography
 \titleformat{\chapter}{\sffamily\bfseries}{}{0pt}{}[{\color{aqua}\hrule}]
 % Display bibliography
