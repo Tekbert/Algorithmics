@@ -1197,7 +1197,7 @@ vertices $u$ and $v$ in an even numbered subset it would join two alternating
 paths and we could get a larger matching by switching the edges of this new
 path.
 
-\section{Exercise Session 3}
+\chapter{Exercise Session 3}
 
 \section{Exercise 2 (LP modeling)}
 
@@ -1215,6 +1215,62 @@ Consider the problem
 \subsection{Solution}
 
 \paragraph{a)}
+
+\section{Exercise 5 (LP feasible region)}
+
+Draw the feasible region of the following linear program:
+\begin{align*}
+   & min &    s & x    & + &    & t   & y    &   &    &    &\\
+   & s.t &      & x    & − &    &     & y    & ≥ &    & 2  &\\
+   &     &      & x    & − &    & 2   & y    & ≤ &    & 10 &\\
+   &     &      & x    & + &    & 2.5 & y    & ≥ &    & 5  &\\
+   &     &    3 & x    & − &    & 0.2 & y    & ≥ &    & 1  &\\
+   &     &      & x    &   &    &     &      & ≥ &    & 0  &\\
+   &     &      &      &   &    &     & y    & ≥ &    & 0  &
+\end{align*}
+
+Give appropriate values for $s$ and $t$ such that the linear program has
+
+\begin{enumerate}[(a)]
+    \item exactly one optimal solution.
+    \item multiple optimal solutions, where each one is bounded (i.e., none of
+          its components has an arbitrarily large magnitude).
+    \item multiple optimal solutions, possibly unbounded.
+    \item no optimal solution.
+\end{enumerate}
+
+\subsection{Solution}
+
+Figure~\ref{figure:Exercise_3_5_Feasible_Region} shows the feasible region for
+the given linear program.
+
+\begin{figure}[htbp]
+    \caption{Feasible region for Exercise 3.5}
+    \vskip 0.2cm
+    \centering
+    \includegraphics[width=\textwidth]{Figures/Exercise_3_5_Feasible_Region}
+    \label{figure:Exercise_3_5_Feasible_Region}
+\end{figure}
+
+\paragraph{(a)}
+\[
+    s=1, t=0 ⇒ \text{minimize } f(x,y) = x
+\]
+
+\subparagraph{Optimal Solution}
+\begin{align*}
+    x-y      &= 2 ⇒ x=2+y\\
+    x+2.5y   &= 5\\
+    2+y+2.5y &= 5\\
+    7y       &= 6 ⇒ y = \frac{6}{7}\\
+    (x,y)    &= (\frac{20}{7}, \frac{6}{7})
+\end{align*}
+
+\paragraph{(b)} $s=0, t=1 ⇒ \text{minimize } f(x,y) = y$
+
+\paragraph{(c)} $s=-1, t=1 ⇒ \text{minimize } f(x,y) = -x+y$
+
+\paragraph{(d)} $s=-1, t=0 ⇒ \text{minimize } f(x,y) = -x$
 
 % -- Bibliography --------------------------------------------------------------
 
