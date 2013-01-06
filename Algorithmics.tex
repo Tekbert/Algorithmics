@@ -1214,7 +1214,9 @@ Consider the problem
 
 \subsection{Solution}
 
-\paragraph{a)} To translate our problem into a linear program we start by transforming the given constraint. Let $x$ be a certain number. We want to constrain the absolute value of $x$ to be smaller or equal to a certain number:
+\paragraph{a)} To translate our problem into a linear program we start by
+transforming the given constraint. Let $x$ be a certain number. We want to
+constrain the absolute value of $x$ to be smaller or equal to a certain number:
 \[
     |x|≤\text{value}
 \]
@@ -1265,7 +1267,7 @@ In the end we get the following linear program:
 \end{align*}
 
 \paragraph{(b)}
-We know convert the problem into standard form:
+We now convert the problem into standard form:
 \begin{align*}
      x₁⁺- x₁⁻ && +x₂⁺- x₂⁻ && +3  &+x₄&   &   &   &   &    & ≤ && 5\\
     -x₁⁺+ x₁⁻ && +x₂⁺- x₂⁻ && +3  &   &+x₅&   &   &   &    & ≤ && 5\\
@@ -1278,7 +1280,7 @@ We know convert the problem into standard form:
     -xᵢ⁺ ≥ 0, xᵢ⁻ ≥ 0,xᵢ ≥ 0 \quad ∀ i ∈ \{1…9\}
 \]
 
-\section{Exercise (LP modeling)}
+\section{Exercise 3 (LP Modeling)}
 
 A state wants to plan its electricity capacity for the next $T$ years. The
 state has a forecast of $d_t$ megawatts of the demand for electricity during
@@ -1336,6 +1338,51 @@ No more than 20\% of the total capacity should ever be nuclear:
 The new capacity for a year has to be greater or equal to 0:
 \[
     readyCoal_t ≥ 0, readyNuclear_t ≥0 \quad ∀ t ∈ \{1,…,T\}
+\]
+
+\section{Exercise 4 (LP Modeling)}
+
+Consider a communication network consisting of n nodes which are connected by
+communication links. Let $A$ be the set of all links. Each link $(i,j) ∈ A$
+allows one-way transmission from node $i$ to node $j$ and can carry up to
+$u_{ij}$ bits per second. There is a positive charge $c_{ij}$ per bit
+transmitted along that link. Each node $k$ generates data at the rate of
+$b_{kl}$ bits per second that have to be transmitted to node $l$, either
+through a direct link $(k,l)$ or by tracing a sequence of links. The problem is
+to choose paths along which all data reach their intended destinations, while
+minimizing the total cost. We allow the data with the same origin and
+destination to be split and be transmitted along different paths. Formulate
+this problem as a linear programming problem.
+
+\section{Solution}
+
+\paragraph{Decision Variables} We define $x_{ij}$ to be the bits per second of
+data transferred from node $i$ to node $j$.
+
+\paragraph{Objective Function} We need to keep the cost of transportation
+small. Therefore we minimize the sum of the cost per link:
+\[
+    min ∑_{i}∑_{j} x_{ij} · c_{ij}
+\]
+
+\paragraph{Constraints} The bits per second transported over a certain link
+must be smaller than the capacity of the link:
+\[
+    x_{ij} ≤ u_{ij}
+\]
+We can not transfer data in the opposite direction of a link:
+\[
+    x_{ij} ≥ 0
+\]
+The incoming data to a certain node $i$ must be equal or larger than the
+generated data sent to this node:
+\[
+    ∑_{∀j ∈ V∖i} x_{ji} - ∑_{∀j ∈ V∖i} b_{ij} ≥ 0
+\]
+The sum over the the capacity sent over all link must be the same as the sum of
+the generated data of all nodes:
+\[
+    ∑_{i}∑{j}x_{ij} = ∑_{i}∑_{j}b_{ij}
 \]
 
 \section{Exercise 5 (LP feasible region)}
