@@ -1267,17 +1267,67 @@ In the end we get the following linear program:
 \paragraph{(b)}
 We know convert the problem into standard form:
 \begin{align*}
-     x₁⁺- x₁⁻ && +x₂⁺- x₂⁻ && +3  &+x₄&   &   &   &   &    & ≤ && 5  \\
-    -x₁⁺+ x₁⁻ && +x₂⁺- x₂⁻ && +3  &   &+x₅&   &   &   &    & ≤ && 5  \\
-     x₁⁺- x₁⁻ && -x₂⁺+ x₂⁻ && -3  &   &   &+x₆&   &   &    & ≤ && 5  \\
-    -x₁⁺+ x₁⁻ && -x₂⁺+ x₂⁻ && -3  &   &   &   &+x₇&   &    & ≤ && 5  \\
-     x₁⁺- x₁⁻ &&           && -5  &   &   &   &   &+x₈&    & ≤ && +x₃⁺- x₃⁻ \\
-    -x₁⁺+ x₁⁻ &&           && +5  &   &   &   &   &   & +x₉& ≤ && +x₃⁺- x₃⁻ \\
+     x₁⁺- x₁⁻ && +x₂⁺- x₂⁻ && +3  &+x₄&   &   &   &   &    & ≤ && 5\\
+    -x₁⁺+ x₁⁻ && +x₂⁺- x₂⁻ && +3  &   &+x₅&   &   &   &    & ≤ && 5\\
+     x₁⁺- x₁⁻ && -x₂⁺+ x₂⁻ && -3  &   &   &+x₆&   &   &    & ≤ && 5\\
+    -x₁⁺+ x₁⁻ && -x₂⁺+ x₂⁻ && -3  &   &   &   &+x₇&   &    & ≤ && 5\\
+     x₁⁺- x₁⁻ &&           && -5  &   &   &   &   &+x₈&    & ≤ && +x₃⁺- x₃⁻\\
+    -x₁⁺+ x₁⁻ &&           && +5  &   &   &   &   &   & +x₉& ≤ && +x₃⁺- x₃⁻\\
 \end{align*}
 \[
     -xᵢ⁺ ≥ 0, xᵢ⁻ ≥ 0,xᵢ ≥ 0 \quad ∀ i ∈ \{1…9\}
 \]
 
+\section{Exercise (LP modeling)}
+
+A state wants to plan its electricity capacity for the next $T$ years. The
+state has a forecast of $d_t$ megawatts of the demand for electricity during
+year $t = 1, …, T$ . The existing capacity, which is in oil-fired plants, that
+will not be retired and will be available during year $t$ is $e_t$. There are
+two alternatives for expanding electric capacity: coal-fired or nuclear power
+plants. There is a capital cost of $c_t$ per megawatt of coal-fired capacity
+that becomes operational at the beginning of year $t$. The corresponding
+capital cost for nuclear power plants is $n_t$. For various political and
+safety reasons, it has been decided that no more than 20\% of the total
+capacity should ever be nuclear. Coal plants last for 20 years, while nuclear
+plants last for 15 years. Formulate a linear program minimizing the costs of a
+feasible expansion plan.
+
+\section{Solution}
+
+\paragraph{Decision Variables} The state wants to know how big the capacity of
+coal and nuclear powered plants that it has to get ready in year $t$ is.
+Therefore we define the decision variables $readyCoal_t$ and $readyNuclear_t$ to
+be the capacity in megawatt for which new coal respective nuclear plants have to
+be ready in year $t$.
+
+\paragraph{Objective Function} We want to minimize the costs of the expansion
+over the years:
+\[
+    minimize ~
+    \left(
+        ∑_{t=1}^{T} c_t · readyCoal_t + ∑_{t=1}^{T} n_t · readyNuclear_t
+    \right)
+\]
+
+\paragraph{Constraints}
+
+The possible capacity should always be larger or equal to the demand for that
+year:
+\begin{align*}
+    readyCoal_0 + readyNuclear_0 + e_0      &≥ d_0\\
+                                            &…\\
+    ∑_{i=0}^{20-1} readyCoal_{T-i} +
+    ∑_{i=0}^{15-1} readyNuclear_{T-i} + e_T &≤ d_T
+\end{align*}
+
+No more than 20\% of the total capacity should ever be nuclear:
+\begin{align*}
+    readyNuclear_0 &≤ 0.2 · (readyCoal_0 + e_0)\\
+                   &…\\
+    ∑_{i=0}^{15-1} readyNuclear_{T-i} &≤ 0.2 · ∑_{i=0}^{20-1} readyCoal_{T-i} +
+                                         0.2 · e_T
+\end{align*}
 
 \section{Exercise 5 (LP feasible region)}
 
