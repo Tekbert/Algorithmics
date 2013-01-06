@@ -1322,11 +1322,15 @@ year:
 \end{align*}
 
 No more than 20\% of the total capacity should ever be nuclear:
+\[
+    readyNuclear_0 ≤ 0.2 · (readyCoal_0 + e_0)
+\]
 \begin{align*}
-    readyNuclear_0 &≤ 0.2 · (readyCoal_0 + e_0)\\
-                   &…\\
-    ∑_{i=0}^{15-1} readyNuclear_{T-i} &≤ 0.2 · ∑_{i=0}^{20-1} readyCoal_{T-i} +
-                                         0.2 · e_T
+    readyNuclear_0 - 0.2 · readyCoal_0 - 0.2 · e_0 &≤ 0\\
+                                                   &…\\
+    ∑_{i=0}^{15-1} readyNuclear_{T-i} -
+    0.2 · ∑_{i=0}^{20-1} readyCoal_{T-i} -
+    0.2 · e_T                                      &≤ 0
 \end{align*}
 
 The new capacity for a year has to be greater or equal to 0:
