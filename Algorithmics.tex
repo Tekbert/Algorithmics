@@ -1203,8 +1203,8 @@ path.
 
 Consider the problem
 \begin{align*}
-    & min~  2|x1 − 5| + 3x2\\
-    & s.t.~ |x1| + |x2 + 3| ≤ 5,
+    min  ~&~ 2|x₁ − 5| + 3x₂\\
+    s.t. ~&~ |x₁| + |x₂ + 3| ≤ 5,
 \end{align*}
 
 \begin{enumerate}[a)]
@@ -1214,7 +1214,70 @@ Consider the problem
 
 \subsection{Solution}
 
-\paragraph{a)}
+\paragraph{a)} To translate our problem into a linear program we start by transforming the given constraint. Let $x$ be a certain number. We want to constrain the absolute value of $x$ to be smaller or equal to a certain number:
+\[
+    |x|≤\text{value}
+\]
+This means that if the value of $x$ is \emph{positive} the following has to
+hold:
+\[
+    x≤value
+\]
+If the value of $x$ is \emph{negative} (-x will be a positive number) then the
+following has to be true:
+\[
+    -x≤value
+\]
+Knowing this we now can translate the given constraint:
+\[
+    |x₁| + |\underbrace{x₂ + 3}_{x₂₃}| ≤ 5
+\]
+to the following four constraints:
+\begin{align*}
+    &&&& \text{$x₁, x₂₃$ positive:}            &&  x₁ + x₂ + 3  & ≤ 5 &&&&\\
+    &&&& \text{$x₁$ negative, $x₂₃$ positive:} && -x₁ + x₂ + 3  & ≤ 5 &&&&\\
+    &&&& \text{$x₁$ positive, $x₂₃$ negative:} &&  x₁ - x₂ - 3  & ≤ 5 &&&&\\
+    &&&& \text{$x₁, x₂₃$ negative:}            && -x₁ - x₂ - 3  & ≤ 5 &&&&\\
+\end{align*}
+
+We now need to transform the objective function. We replace $|x₁-5|$ by a new
+variable $x₃$~\cite{LP_Solve_Absolute_Values}:
+\[
+    min ~~ 2x₃+ 3x₂
+\]
+
+Since $x₃$ should be the same as $|x₁-5|$ we conclude that the following two
+constraints have to be true:
+\begin{align*}
+    x₁-5 ≤ x₃ && -x₁+5 ≤ x₃\\
+\end{align*}
+In the end we get the following linear program:
+\[
+    min~ 3x₂ + 2x₃
+\]
+\begin{align*}
+     x₁ && +x₂ && +3  && ≤ && 5  \\
+    -x₁ && +x₂ && +3  && ≤ && 5  \\
+     x₁ && -x₂ && -3  && ≤ && 5  \\
+    -x₁ && -x₂ && -3  && ≤ && 5  \\
+     x₁ &&     && -5  && ≤ && x₃ \\
+    -x₁ &&     && +5  && ≤ && x₃ \\
+\end{align*}
+
+\paragraph{(b)}
+We know convert the problem into standard form:
+\begin{align*}
+     x₁⁺- x₁⁻ && +x₂⁺- x₂⁻ && +3  &+x₄&   &   &   &   &    & ≤ && 5  \\
+    -x₁⁺+ x₁⁻ && +x₂⁺- x₂⁻ && +3  &   &+x₅&   &   &   &    & ≤ && 5  \\
+     x₁⁺- x₁⁻ && -x₂⁺+ x₂⁻ && -3  &   &   &+x₆&   &   &    & ≤ && 5  \\
+    -x₁⁺+ x₁⁻ && -x₂⁺+ x₂⁻ && -3  &   &   &   &+x₇&   &    & ≤ && 5  \\
+     x₁⁺- x₁⁻ &&           && -5  &   &   &   &   &+x₈&    & ≤ && +x₃⁺- x₃⁻ \\
+    -x₁⁺+ x₁⁻ &&           && +5  &   &   &   &   &   & +x₉& ≤ && +x₃⁺- x₃⁻ \\
+\end{align*}
+\[
+    -xᵢ⁺ ≥ 0, xᵢ⁻ ≥ 0,xᵢ ≥ 0 \quad ∀ i ∈ \{1…9\}
+\]
+
 
 \section{Exercise 5 (LP feasible region)}
 
