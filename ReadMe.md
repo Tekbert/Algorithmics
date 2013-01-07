@@ -19,7 +19,9 @@ of fonts that are already installed on your system.
 
 # Translation #
 
-	# Convert pseudocode examples to LaTeX
-	cd Utilities; ./convert_code_to_tex.sh; cd ..
-	# Generate pdf
-	xelatex *.tex; biber *.tex; xelatex *.tex
+```shell
+# Convert pseudocode examples to LaTeX
+cd Utilities; ./convert_code_to_tex.sh; cd ..
+# Generate pdf
+xelatex *.tex; biber *.tex; xelatex *.tex
+```
