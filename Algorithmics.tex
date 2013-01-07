@@ -1295,7 +1295,7 @@ capacity should ever be nuclear. Coal plants last for 20 years, while nuclear
 plants last for 15 years. Formulate a linear program minimizing the costs of a
 feasible expansion plan.
 
-\section{Solution}
+\subsection{Solution}
 
 \paragraph{Decision Variables} The state wants to know how big the capacity of
 coal and nuclear powered plants that it has to get ready in year $t$ is.
@@ -1354,7 +1354,7 @@ minimizing the total cost. We allow the data with the same origin and
 destination to be split and be transmitted along different paths. Formulate
 this problem as a linear programming problem.
 
-\section{Solution}
+\subsection{Solution}
 
 \paragraph{Decision Variables} We define $x_{ij}$ to be the bits per second of
 data transferred from node $i$ to node $j$.
@@ -1440,6 +1440,64 @@ the given linear program.
 \paragraph{(c)} $s=-1, t=1 ⇒ \text{minimize } f(x,y) = -x+y$
 
 \paragraph{(d)} $s=-1, t=0 ⇒ \text{minimize } f(x,y) = -x$
+
+\section{Exercise 6 (LP Duality)}
+
+Given the following primal problem:
+\begin{alignat*}{7}
+    min ~&& 13x₁ ~&& + ~&& 10x₂ ~&& + ~&& 6x₃ ~&&  \\
+    s.t ~&& 5x₁  ~&& + ~&& x₂   ~&& + ~&& 3x₃ ~&&  = 8\\
+        ~&& 3x₁  ~&& + ~&& x₂   ~&&   ~&&     ~&&  = 3\\
+        ~&& x₁   ~&& , ~&& x₂   ~&& , ~&& x_3 ~&&  ≥0\\
+\end{alignat*}
+\begin{enumerate}[(a)]
+    \item Form the corresponding dual problem.
+    \item Show by complementary slackness that the solution $x^∗ = (1, 0, 1)$
+          is an optimal solution to the primal problem.
+\end{enumerate}
+
+\subsection{Solution}
+
+\paragraph{(a)}
+\begin{alignat*}{7}
+    max ~&& 8p₁ ~&& +  ~&& 3p₂ ~&&   ~&&   ~&&\\
+        ~&& p₁  ~&&    ~&&     ~&&   ~&&   ~&& free\\
+        ~&&     ~&&    ~&&  p₂ ~&&   ~&&   ~&& free\\
+        ~&& 5p₁ ~&& +  ~&& 3p₂ ~&&   ~&& ≤ ~&& 13\\
+        ~&&  p₁ ~&& +  ~&&  p₂ ~&&   ~&& ≤ ~&& 10\\
+        ~&& 3p₁ ~&&    ~&&     ~&&   ~&& ≤ ~&& 6\\
+\end{alignat*}
+
+\paragraph{(b)} To calculate the optimal solution for the dual we start by
+drawing a graph for this problem.
+Figure~\ref{figure:Exercise_3_6_Feasible_Region_Dual} shows that the optimal
+solution for the dual is $(2,1)$.\\
+
+\begin{figure}[htbp]
+    \caption{Feasible Set and optimal solution for the dual LP problem of
+             exercise 3.6}
+    \vskip 0.2cm
+    \centering
+    \includegraphics[width=\textwidth]
+        {Figures/Exercise_3_6_Feasible_Region_Dual}
+    \label{figure:Exercise_3_6_Feasible_Region_Dual}
+\end{figure}
+
+We now check with the theorem of complementary slackness if $x^∗$ is an optimal
+solution to the primal.
+\begin{alignat*}{1}
+    pi(aᵢ′x^∗−bᵢ)           &= 0 \quad ∀i\\
+    p₁(a₁′x^∗-b₁)           &= 0\\[5pt]
+    2·(5·1 + 1·0 + 3·1 - 8) &= 0\\
+    1·(3·1 + 1·0 + 0·1 - 3) &= 0
+\end{alignat*}
+\begin{alignat*}{1}
+    (c_j − p′A_j)x_j     &= 0 \quad∀j\\
+    (c₁ − p′A₁)x₁        &= 0\\[5pt]
+    (13 − 2·5 + 1·3) · 1 &= 0\\
+    (10 − 2·1 + 1·1) · 0 &= 0\\
+    ( 6 − 2·3 + 1·0) · 1 &= 0\\
+\end{alignat*}
 
 % -- Bibliography --------------------------------------------------------------
 
