@@ -1199,7 +1199,18 @@ path.
 
 \chapter{Exercise Session 3}
 
-\section{Exercise 2 (LP modeling)}
+\section{Exercise 1 (LP/IP Modeling)}
+
+Propose (integer) linear programs for each of the following three functions
+such that the optimal objective value corresponds to $f_j(x₁,x₂), j = 1,2,3$:
+
+\begin{itemize}
+    \item $f₁(x₁, x₂) = min{x_1,x_2}$ with $0 ≤ xᵢ ≤ C, i = 1,2$.
+    \item $f₂(x₁, x₂) = |x₁ − x₂|$ with $0 ≤ xᵢ ≤ C, i = 1, 2$.
+    \item $f₃(x₁, x₂) = x₁ ⊕ x₂$ with $xᵢ ∈ {0, 1}, i = 1, 2$.
+\end{itemize}
+
+\section{Exercise 2 (LP Modeling)}
 
 Consider the problem
 \begin{align*}
@@ -1269,12 +1280,12 @@ In the end we get the following linear program:
 \paragraph{(b)}
 We now convert the problem into standard form:
 \begin{alignat*}{6}
-     x₁⁺- x₁⁻ & +x₂⁺- x₂⁻ & +3  &+x₄&   &   &   &   &     &             &= 5\\
-    -x₁⁺+ x₁⁻ & +x₂⁺- x₂⁻ & +3  &   &+x₅&   &   &   &     &             &= 5\\
-     x₁⁺- x₁⁻ & -x₂⁺+ x₂⁻ & -3  &   &   &+x₆&   &   &     &             &= 5\\
-    -x₁⁺+ x₁⁻ & -x₂⁺+ x₂⁻ & -3  &   &   &   &+x₇&   &     &             &= 5\\
-     x₁⁺- x₁⁻ &           & -5  &   &   &   &   &+x₈&     & - x₃⁺ + x₃⁻ &= 0\\
-    -x₁⁺+ x₁⁻ &           & +5  &   &   &   &   &   & +x₉ & - x₃⁺ + x₃⁻ &= 0\\
+     x₁⁺- x₁⁻ & +x₂⁺- x₂⁻ &+x₄&   &   &   &   &     &             &=  2\\
+    -x₁⁺+ x₁⁻ & +x₂⁺- x₂⁻ &   &+x₅&   &   &   &     &             &=  2\\
+     x₁⁺- x₁⁻ & -x₂⁺+ x₂⁻ &   &   &+x₆&   &   &     &             &=  8\\
+    -x₁⁺+ x₁⁻ & -x₂⁺+ x₂⁻ &   &   &   &+x₇&   &     &             &=  8\\
+     x₁⁺- x₁⁻ &           &   &   &   &   &+x₈&     & - x₃⁺ + x₃⁻ &=  5\\
+    -x₁⁺+ x₁⁻ &           &   &   &   &   &   & +x₉ & - x₃⁺ + x₃⁻ &= -5\\
 \end{alignat*}
 \[
     -xᵢ⁺ ≥ 0, xᵢ⁻ ≥ 0,xᵢ ≥ 0 \quad ∀ i ∈ \{1…9\}
@@ -1551,7 +1562,7 @@ able to steal more gold from a bank that it contains.
 
 \subparagraph{All robbers for a certain bank need a seat in a getaway car}
 
-\section{Exercise 3.7 (IP Modeling)}
+\section{Exercise 8 (IP Modeling)}
 
 Suppose you have to choose a set of investments $i ∈ {1, ..., 7}$ with profits
 $pi$. The goal is to maximize your profit while not violating the following
