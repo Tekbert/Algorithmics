@@ -1551,6 +1551,89 @@ able to steal more gold from a bank that it contains.
 
 \subparagraph{All robbers for a certain bank need a seat in a getaway car}
 
+\section{Exercise 3.7 (IP Modeling)}
+
+Suppose you have to choose a set of investments $i ∈ {1, ..., 7}$ with profits
+$pi$. The goal is to maximize your profit while not violating the following
+constraints:
+
+\begin{itemize}
+    \item You cannot invest in all investments.
+    \item You have to choose at least one investment.
+    \item Investment 1 cannot be chosen if investment 3 is chosen.
+    \item Investment 4 can be chosen only if investment 2 is also chosen.
+    \item You have to choose either both investments 1 and 5 or neither.
+    \item You have to choose either at least one of the investments 1,2,3, or
+          at least two investments from 2,4,5,6.
+\end{itemize}
+
+Find a (mixed) integer program to model this optimization problem and describe
+the used variables.
+
+\subsection{Solution}
+
+\paragraph{Decision Variables}
+
+We need to know in which investment we should make. Therefore we choose $x_i$
+to be the a binary decision variable which is set to 1 if we choose investment
+$i$ or 0 otherwise.
+
+\paragraph{Objective Function}
+
+We need to maximize the profit “made” by all investments:
+\[
+    ∑ᵢ xᵢ · pᵢ
+\]
+
+\paragraph{Constraints}
+
+\subparagraph{Cannot use all investments together}
+\[
+    ∑_{i} xᵢ < 7
+\]
+
+\subparagraph{At least one investment}
+\[
+    ∑_{i} xᵢ ≥ 1
+\]
+
+\subparagraph{Investment 1 $⇒ ¬$ investment 3}
+\[
+    x₁ + x₃ ≤ 1
+\]
+
+\subparagraph{Investment 4 only with investment 2}~\\[5pt]
+\begin{minipage}[t]{0.35\textwidth}
+\begin{tabular}{cccc}
+    $x₂$ & $x₄$ & Okay & $x₂-x₄$\\
+    \hline
+     1   &  0   & yes  & 1\\
+     1   &  1   & yes  & 0\\
+     0   &  1   & no   & -1\\
+     0   &  0   & yes  & 0\\
+\end{tabular}
+\end{minipage}
+\begin{minipage}[t]{0.35\textwidth}
+\[
+    ⇒ x₂ - x₄ ≥ 0
+\]
+\end{minipage}
+
+\subparagraph{Investments 1 and 5 or neither}
+\[
+    x₁ - x₅ = 0
+\]
+
+\subparagraph{One of investment 1,2,3 or two from investment 2,4,5,6}
+\[
+    ∑_{i=1}^{3} xᵢ ≥ 1 ~or~ ∑_{i=2}^{6} xᵢ ≥ 2
+\]
+We combine the two constraints to a single new constraint
+~\cite{Informatik_Forum_Or_Constraints}:
+\[
+     2·∑_{i=1}^{3} xᵢ + ∑_{i=2}^{6} xᵢ ≥ 2
+\]
+
 % -- Bibliography --------------------------------------------------------------
 
 \newpage
