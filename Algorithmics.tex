@@ -1268,14 +1268,14 @@ In the end we get the following linear program:
 
 \paragraph{(b)}
 We now convert the problem into standard form:
-\begin{align*}
-     x₁⁺- x₁⁻ && +x₂⁺- x₂⁻ && +3  &+x₄&   &   &   &   &    & ≤ && 5\\
-    -x₁⁺+ x₁⁻ && +x₂⁺- x₂⁻ && +3  &   &+x₅&   &   &   &    & ≤ && 5\\
-     x₁⁺- x₁⁻ && -x₂⁺+ x₂⁻ && -3  &   &   &+x₆&   &   &    & ≤ && 5\\
-    -x₁⁺+ x₁⁻ && -x₂⁺+ x₂⁻ && -3  &   &   &   &+x₇&   &    & ≤ && 5\\
-     x₁⁺- x₁⁻ &&           && -5  &   &   &   &   &+x₈&    & ≤ && +x₃⁺- x₃⁻\\
-    -x₁⁺+ x₁⁻ &&           && +5  &   &   &   &   &   & +x₉& ≤ && +x₃⁺- x₃⁻\\
-\end{align*}
+\begin{alignat*}{6}
+     x₁⁺- x₁⁻ & +x₂⁺- x₂⁻ & +3  &+x₄&   &   &   &   &     &             &= 5\\
+    -x₁⁺+ x₁⁻ & +x₂⁺- x₂⁻ & +3  &   &+x₅&   &   &   &     &             &= 5\\
+     x₁⁺- x₁⁻ & -x₂⁺+ x₂⁻ & -3  &   &   &+x₆&   &   &     &             &= 5\\
+    -x₁⁺+ x₁⁻ & -x₂⁺+ x₂⁻ & -3  &   &   &   &+x₇&   &     &             &= 5\\
+     x₁⁺- x₁⁻ &           & -5  &   &   &   &   &+x₈&     & - x₃⁺ + x₃⁻ &= 0\\
+    -x₁⁺+ x₁⁻ &           & +5  &   &   &   &   &   & +x₉ & - x₃⁺ + x₃⁻ &= 0\\
+\end{alignat*}
 \[
     -xᵢ⁺ ≥ 0, xᵢ⁻ ≥ 0,xᵢ ≥ 0 \quad ∀ i ∈ \{1…9\}
 \]
@@ -1489,15 +1489,67 @@ solution to the primal.
     pi(aᵢ′x^∗−bᵢ)           &= 0 \quad ∀i\\
     p₁(a₁′x^∗-b₁)           &= 0\\[5pt]
     2·(5·1 + 1·0 + 3·1 - 8) &= 0\\
-    1·(3·1 + 1·0 + 0·1 - 3) &= 0
+    1·(3·1 + 1·0 + 0·1 - 3) &= 0\\[10pt]
+    (c_j − p′A_j)x_j        &= 0 \quad∀j\\
+    (c₁ − p′A₁)x₁           &= 0\\[5pt]
+    (13 − 2·5 + 1·3) · 1    &= 0\\
+    (10 − 2·1 + 1·1) · 0    &= 0\\
+    ( 6 − 2·3 + 1·0) · 1    &= 0\\
 \end{alignat*}
-\begin{alignat*}{1}
-    (c_j − p′A_j)x_j     &= 0 \quad∀j\\
-    (c₁ − p′A₁)x₁        &= 0\\[5pt]
-    (13 − 2·5 + 1·3) · 1 &= 0\\
-    (10 − 2·1 + 1·1) · 0 &= 0\\
-    ( 6 − 2·3 + 1·0) · 1 &= 0\\
-\end{alignat*}
+
+\section{Exercise 7 (IP Modeling)}
+
+The Beagle Boys plan a big attack on Scrooge McDuck by plundering several of
+his banking houses at the same time. There are $n$ Beagle Boys and $m$ possible
+banking houses and their profit should be maximized. But there are constraints
+which have to be satisfied:
+
+\begin{itemize}
+    \item Each banking house $j$ stores $g_j$ units of gold.
+    \item Each Beagle Boy $i$ can carry at most $pᵢ$ units of gold.
+    \item If several Beagle Boys plunder the same banking house their carry
+          capacities are added. But clearly they cannot carry more gold than
+          available.
+    \item In the getaway cars there are $s$ seats next to the driver so at most
+          $s$ Beagle Boys can get away from one banking house in one car.
+    \item The Beagle Boys are able to organize at most $d$ drivers. It is
+          possible to send more than one car to a banking house.
+\end{itemize}
+
+Find a (mixed) integer program to model this plan and describe the used
+variables.
+
+\subsection{Solution}
+
+\paragraph{Decision Variables}
+
+We need to know to which banking house $j$ we have to send beagle boy $i$.
+Therefore we define the decision variable $x_{ij}$ which is defined to be the
+amount that a beagle boy $i$ steals from a certain bank $j$.
+
+\paragraph{Objective Function}
+
+We need to maximize the profit or in another way the amount of money which is
+stolen. This in turn means that we should minimize the amount still in the
+banks after the robbery.
+\[
+    minimize ∑_{j=1}^{m} \left( g_j - ∑_{i=1}^{n} x_{ij} \right)
+\]
+
+\paragraph{Constraints}
+
+\subparagraph{Each Beagle Boy $i$ can carry at most $pᵢ$ units of gold.}
+\[
+    x_{ij} ≤ pᵢ \quad ∀i
+\]
+
+\subparagraph{Amount of Money after Robbery ≥ 0:} Even the Beagle Boys are not
+able to steal more gold from a bank that it contains.
+\[
+    g_j - ∑_{i=1}^{n} x_{ij} \quad ∀j ∈ {1,…,m}
+\]
+
+\subparagraph{All robbers for a certain bank need a seat in a getaway car}
 
 % -- Bibliography --------------------------------------------------------------
 
