@@ -1210,6 +1210,61 @@ such that the optimal objective value corresponds to $f_j(x₁,x₂), j = 1,2,3$
     \item $f₃(x₁, x₂) = x₁ ⊕ x₂$ with $xᵢ ∈ {0, 1}, i = 1, 2$.
 \end{itemize}
 
+\subsection{Solution}
+
+\paragraph{$f₁(x₁, x₂) = min{x_1,x_2}$}
+
+We start with the constraints. We know that the minimum of 2 numbers minus
+either one of the numbers has to be smaller than 0:
+\begin{alignat*}{1}
+    minimum_{x_1,x_2} - x₁ &≤ 0\\
+    minimum_{x_1,x_2} - x₂ &≤ 0\\
+\end{alignat*}
+
+$minimum_{x_1,x_2}$ needs to be the maximum possible value which satisfies these
+constraints. So our objective function is:
+\[
+    maximize ~~ minimum_{x_1,x_2}
+\]
+
+\paragraph{$f₂(x₁, x₂) = |x₁ − x₂|$}
+
+We know that the absolute value of a number like for example $y = x₁ − x₂$ minus
+the value of the number has to be bigger or equal to 0. We now need the
+smallest value which fits these constraints. Therefore we get:
+
+\begin{alignat*}{1}
+    minimize ~~~ abs_{x₁ − x₂}\\
+    abs_{x₁ − x₂} - (x₁ − x₂) &≥ 0\\
+    abs_{x₁ − x₂} + (x₁ − x₂) &≥ 0\\
+\end{alignat*}
+
+\paragraph{$f₃(x₁, x₂) = x₁ ⊕ x₂$}
+
+\begin{center}
+    \begin{tabular}{ccccc}
+        $x₁$ & $x₂$ & $x₁ ⊕ x₂$ & $(x₁ ⊕ x₂) -x₁-x₂$ & $(x₁ ⊕ x₂) +x₁+x₂$\\
+        \hline
+        0    & 0    & 0         & 0                   & 0\\
+        0    & 1    & 1         & 0                   & 1\\
+        1    & 0    & 1         & 0                   & 1\\
+        1    & 1    & 0         & -2                  & 2\\
+    \end{tabular}
+\end{center}
+
+From the table above we see that the following constraints have to be true:
+
+\begin{alignat*}{1}
+    xor_{x₁,x₂} -x₁-x₂   &≤ 0\\
+    xor_{x₁,x₂} +x₁+x₂   &≤ 2\\
+\end{alignat*}
+
+We need to maximize the value of $xor_{x₁,x₂}$ since the left part of the
+constraints is smaller or equal than a certain constant:
+\[
+    maximize ~~ xor_{x₁,x₂}
+\]
+
 \section{Exercise 2 (LP Modeling)}
 
 Consider the problem
@@ -1336,12 +1391,12 @@ year:
 
 No more than 20\% of the total capacity should ever be nuclear:
 \[
-    readyNuclear_0 ≤ 0.2 · (readyCoal_0 + e_0)
+    readyNuclear_0 ≤ 0.2 · (readyCoal_0 + e_0 + readyNuclear_0)
 \]
 \begin{align*}
-    readyNuclear_0 - 0.2 · readyCoal_0 - 0.2 · e_0 &≤ 0\\
+    0.8 · readyNuclear_0 - 0.2 · readyCoal_0 - 0.2 · e_0 &≤ 0\\
                                                    &…\\
-    ∑_{i=0}^{15-1} readyNuclear_{T-i} -
+    0.8 · ∑_{i=0}^{15-1} readyNuclear_{T-i} -
     0.2 · ∑_{i=0}^{20-1} readyCoal_{T-i} -
     0.2 · e_T                                      &≤ 0
 \end{align*}
